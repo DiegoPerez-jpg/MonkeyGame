@@ -4,10 +4,10 @@ import graphics.terrain.Tile;
 
 import java.util.ArrayList;
 
-public class levelManager {
+public class LevelManager {
     ArrayList<Tile> esquinas;
 
-    public levelManager(ArrayList<Tile> esquinas) {
+    public LevelManager(ArrayList<Tile> esquinas) {
         this.esquinas = esquinas;
     }
     public Tile previousEsquina(Tile tile) {

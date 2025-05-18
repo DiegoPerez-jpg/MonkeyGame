@@ -35,7 +35,7 @@ public class Balloon extends Entity {
             target = GameManager.getInstance().levelManager.nextEsquina(target);
             if(target!=null){
 
-                GameManager.getInstance().doDamage(this.getAllDamage());
+                GameManager.getInstance().doDamage( this.getAllDamage());
             }
             GameManager.getInstance().balloonManager.removeBalloon(this);
             return;

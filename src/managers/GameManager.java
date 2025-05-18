@@ -10,10 +10,11 @@ public class GameManager {
     public MonkeyManager monkeyManager;
     public BalloonManager balloonManager;
     public BulletManager bulletManager;
+    public LevelManager levelManager;
     public int width, height;
     public Renderer renderer;
     public float time;
-
+    public double vida;
     private GameManager(){
         this.width = 1000;
         this.height = 800;
@@ -33,11 +34,16 @@ public class GameManager {
         this.monkeyManager = new MonkeyManager();
         this.balloonManager = new BalloonManager();
         this.bulletManager = new BulletManager();
+        this.levelManager = new LevelManager(null);
         //glfwWindowShouldClose devuelve true si se cierra la ventana
         while (!glfwWindowShouldClose(renderer.getWindow())) { //Game loop
             renderer.update();
             inputManager.update();
         }
         renderer.clean();
+    }
+
+    public void doDamage(double damage){
+        this.vida = vida - damage;
     }
 }
