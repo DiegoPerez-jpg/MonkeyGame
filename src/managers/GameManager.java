@@ -35,6 +35,7 @@ public class GameManager {
         this.balloonManager = new BalloonManager();
         this.bulletManager = new BulletManager();
         this.levelManager = new LevelManager(null);
+        tileManager.searchTile(2, 2).toRoad();
         //glfwWindowShouldClose devuelve true si se cierra la ventana
         while (!glfwWindowShouldClose(renderer.getWindow())) { //Game loop
             renderer.update();
