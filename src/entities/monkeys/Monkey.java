@@ -7,6 +7,8 @@ import entities.bullets.BulletPrefab;
 import graphics.Color;
 import managers.GameManager;
 import utilities.math.Point;
+import utilities.math.Vector;
+import utilities.util;
 
 public class Monkey extends Entity {
     Color skin;
@@ -20,7 +22,7 @@ public class Monkey extends Entity {
 
     public Monkey(int size, BulletPrefab bp, float rate, float cost, float range, String nombre, Color skin, Point position) {
         super(skin,position,size);
-        this.bp = bala;
+        this.bp = bp;
         this.rate = rate;
         this.cost = cost;
         this.range = range;
@@ -28,21 +30,20 @@ public class Monkey extends Entity {
     }
     private Balloon getCloserBalloon(){
         for(Balloon b : gm.balloonManager.getBalloons()) {
-            Vector distance = CreateVector(b.position, this.position);
+            Vector distance = util.createVector(b.position, this.position);
             if (distance.getMod() < this.range) {
                 return b;
             }
-
         }
+        return null;
     }
     public Bullet disparar(float time){
         if(time-lastShotTime>rate){
             Balloon b = this.getCloserBalloon();
             if(b!=null){
                 lastShotTime = time;
-                return new Bullet(bulletPrefab,this.position,b);
+                return new Bullet(bp, this.position, b);
             }
-
         }
         return null;
     }

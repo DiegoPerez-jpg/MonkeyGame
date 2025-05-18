@@ -7,6 +7,8 @@ public class GameManager {
     private static GameManager instance;
     public InputManager inputManager;
     public TileManager tileManager;
+    public MonkeyManager monkeyManager;
+    public BalloonManager balloonManager;
     public int width, height;
     public Renderer renderer;
 
@@ -25,6 +27,8 @@ public class GameManager {
         this.renderer = new Renderer(width, height);
         this.inputManager = new InputManager();
         this.tileManager = new TileManager();
+        this.monkeyManager = new MonkeyManager();
+        this.balloonManager = new BalloonManager();
         //glfwWindowShouldClose devuelve true si se cierra la ventana
         while (!glfwWindowShouldClose(renderer.getWindow())) { //Game loop
             renderer.update();

@@ -12,7 +12,7 @@ public class TileManager {
         this.tiles = new ArrayList<>();
         for (int i = 1; i<=15; i++){
             for (int j = 1; j<=15; i++){
-                tiles.add(new Tile(Color.GRASS, new Point(i, j)));
+                tiles.add(new Tile(Color.GRASS, new Point(15*i, 15*j)));
             }
         }
     }
