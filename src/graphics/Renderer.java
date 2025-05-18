@@ -7,6 +7,9 @@ import utilities.math.Point;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import graphics.Draw;
+
+import java.util.ArrayList;
+
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -48,8 +51,22 @@ public class Renderer {
     }
 
     private void draw(){
-        Draw.fill(Color.BLACK); //Rellena toda la pantalla de negro
-        for (Tile t : tm.tiles){Draw.drawPoly(t.corners, t.background);}
+//        System.out.println("------");
+//        for (Tile t : tm.tiles){
+//            Draw.drawPoly(t.corners, t.background);
+//            System.out.println("color: " + t.background);
+//            for (Point p : t.corners){
+//                System.out.println("x: " + p.x + ", y: " + p.y);
+//            }
+//        }
+//        System.out.println("------");
+//        ArrayList<Point> list = new ArrayList();
+//        list.add(new Point(0, 0));
+//        list.add(new Point(0, 500));
+//        list.add(new Point(500, 0));
+//        list.add(new Point(500, 500));
+//        Draw.drawPoly(list, Color.GRASS);
+
     }
 
     public void clean() { //Libera los recursos

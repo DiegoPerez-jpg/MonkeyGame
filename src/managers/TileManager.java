@@ -10,9 +10,9 @@ public class TileManager {
     public ArrayList<Tile> tiles;
     public TileManager() {
         this.tiles = new ArrayList<>();
-        for (int i = 1; i<=15; i++){
-            for (int j = 1; j<=15; i++){
-                tiles.add(new Tile(Color.GRASS, new Point(15*i, 15*j)));
+        for (int i = 0; i<15; i++){
+            for (int j = 0; j<15; j++){
+                tiles.add(new Tile(Color.GRASS, new Point((15*i)+8, (15*j)+8)));
             }
         }
     }

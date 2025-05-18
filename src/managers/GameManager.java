@@ -27,9 +27,9 @@ public class GameManager {
 
     public void play(){
         //Estas clases llaman al gm en sus constructores por lo que no pueden ser creadas en el contructor del gm
+        this.tileManager = new TileManager();
         this.renderer = new Renderer(width, height);
         this.inputManager = new InputManager();
-        this.tileManager = new TileManager();
         this.monkeyManager = new MonkeyManager();
         this.balloonManager = new BalloonManager();
         this.bulletManager = new BulletManager();
