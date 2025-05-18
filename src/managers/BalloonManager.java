@@ -18,4 +18,9 @@ public class BalloonManager {
     public ArrayList<Balloon> getBalloons() {
         return balloons;
     }
+    public void updateBalloons(float t) {
+        for (Balloon b : balloons) {
+            b.avanzar(t);
+        }
+    }
 }

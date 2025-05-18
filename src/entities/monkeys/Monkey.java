@@ -27,7 +27,7 @@ public class Monkey extends Entity {
         this.nombre = nombre;
     }
     private Balloon getCloserBalloon(){
-        for(Balloon b : gm.getBalloons()) {
+        for(Balloon b : gm.balloonManager.getBalloons()) {
             Vector distance = CreateVector(b.position, this.position);
             if (distance.getMod() < this.range) {
                 return b;
