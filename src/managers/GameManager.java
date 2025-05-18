@@ -1,7 +1,6 @@
 package managers;
 
 import graphics.Renderer;
-
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 
 public class GameManager {
@@ -27,6 +26,7 @@ public class GameManager {
         //glfwWindowShouldClose devuelve true si se cierra la ventana
         while (!glfwWindowShouldClose(renderer.getWindow())) { //Game loop
             renderer.update();
+            inputManager.update();
         }
         renderer.clean();
     }
