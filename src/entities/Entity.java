@@ -4,11 +4,11 @@ import graphics.Color;
 import utilities.math.Point;
 
 public class Entity {
-    Color Skin;
-    Point position;
-    int size;
-    public Entity(Color Skin, Point position,int size) {
-        this.Skin = Skin;
+    public Color skin;
+    public Point position;
+    public int size;
+    public Entity(Color skin, Point position,int size) {
+        this.skin = skin;
         this.position = position;
         this.size = size;
     }

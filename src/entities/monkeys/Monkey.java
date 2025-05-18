@@ -2,6 +2,7 @@ package entities.monkeys;
 
 import entities.Entity;
 import entities.balloons.Balloon;
+import entities.bullets.Bullet;
 import graphics.Color;
 import utilities.math.Point;
 
@@ -24,7 +25,7 @@ public class Monkey extends Entity {
         this.nombre = nombre;
     }
     private Balloon getCloserBalloon(){
-        for(Balloon b : gm.getBaloons()) {
+        for(Balloon b : gm.getBalloons()) {
             Vector distance = CreateVector(b.position, this.position);
             if (distance.getMod() < this.range) {
                 return b;
@@ -34,10 +35,10 @@ public class Monkey extends Entity {
     }
     public Bullet disparar(float time){
         if(time-lastShotTime>rate){
-            Balloon b = getCloserBalloon();
+            Balloon b = this.getCloserBalloon();
             if(b!=null){
                 lastShotTime = time;
-                return new Bullet(bulletPrefab,position,b);
+                return new Bullet(bulletPrefab,this.position,b);
             }
 
         }
