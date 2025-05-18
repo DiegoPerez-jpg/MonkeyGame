@@ -1,0 +1,10 @@
+# Ignorar todos los archivos
+*
+
+# No ignorar el contenido
+!src/
+!src/**
+
+!pom.xml
+!README.md
+!.gitignore
