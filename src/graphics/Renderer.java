@@ -45,28 +45,14 @@ public class Renderer {
     }
 
     public void update() {
+        Draw.fill(Color.BLACK); //Rellena toda la pantalla de un color y limpia el buffer
         draw();
         glfwSwapBuffers(window); //Mostrar frame
         glfwPollEvents(); //Procesar eventos
     }
 
     private void draw(){
-//        System.out.println("------");
-//        for (Tile t : tm.tiles){
-//            Draw.drawPoly(t.corners, t.background);
-//            System.out.println("color: " + t.background);
-//            for (Point p : t.corners){
-//                System.out.println("x: " + p.x + ", y: " + p.y);
-//            }
-//        }
-//        System.out.println("------");
-//        ArrayList<Point> list = new ArrayList();
-//        list.add(new Point(0, 0));
-//        list.add(new Point(0, 500));
-//        list.add(new Point(500, 0));
-//        list.add(new Point(500, 500));
-//        Draw.drawPoly(list, Color.GRASS);
-
+        for (Tile t : tm.tiles){Draw.drawPoly(t.corners, t.background);}
     }
 
     public void clean() { //Libera los recursos

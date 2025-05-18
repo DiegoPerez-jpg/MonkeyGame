@@ -18,10 +18,11 @@ public class Tile { // 16x16 px each
         this.position = new Point(posCentrada.x-8, posCentrada.y-8);
         this.posCentrada = posCentrada;
         this.corners = new ArrayList<>();
+        //Importante puntos en sentido antihorario empezando por arriba a la izq
+        corners.add(new Point(position.x, position.y+16));
         corners.add(position);
         corners.add(new Point(position.x+16, position.y));
         corners.add(new Point(position.x+16, position.y+16));
-        corners.add(new Point(position.x, position.y+16));
         isGrass = (background == Color.GRASS);
         monkey = null;
     }

@@ -16,8 +16,8 @@ public class GameManager {
     public float time;
     public double vida;
     private GameManager(){
-        this.width = 1000;
-        this.height = 800;
+        this.width = 640;
+        this.height = 480;
         this.time = 0;
     }
 
