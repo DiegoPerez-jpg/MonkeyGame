@@ -16,5 +16,24 @@ public class Vector {
         float mod = getMod();
         return new Vector(this.x/mod, this.y/mod);
     }
+    public Vector multiply(Point p) {
+        return new Vector(x*p.x, y*p.y);
+    }
 
+    public Vector multiply(Float f) {
+        return new Vector(x*f, y*f);
+    }
+    public Vector multiply(Vector p) {
+        return new Vector(x*p.x,y*p.y);
+    }
+    public Vector add(Point p) {
+        return new Vector(x+p.x, y+p.y);
+    }
+
+    public Vector add(Float f) {
+        return new Vector(x+f, y+f);
+    }
+    public Vector add(Vector p) {
+        return new Vector(x+p.x,y+p.y);
+    }
 }
