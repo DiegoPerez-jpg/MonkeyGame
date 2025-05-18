@@ -26,7 +26,7 @@ public class Bullet extends Entity {
         this.bulletType = bt.bulletType;
         this.target = target;
     }
-    public void avanzarBala(){
+    public void avanzar(float t){
 
     }
 }

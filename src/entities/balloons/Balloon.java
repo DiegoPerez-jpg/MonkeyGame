@@ -16,6 +16,9 @@ public class Balloon extends Entity {
         this.previousBallon = previousBallon;
         this.tipo = tipo;
     }
+    public void avanzar(float t){
+
+    }
     public void getHit(Double damage){
         this.vida = this.vida-damage;
         if(this.vida <= 0){

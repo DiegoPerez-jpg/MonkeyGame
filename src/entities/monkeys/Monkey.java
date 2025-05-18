@@ -4,6 +4,7 @@ import entities.Entity;
 import entities.balloons.Balloon;
 import entities.bullets.Bullet;
 import graphics.Color;
+import managers.GameManager;
 import utilities.math.Point;
 
 public class Monkey extends Entity {
@@ -25,7 +26,7 @@ public class Monkey extends Entity {
         this.nombre = nombre;
     }
     private Balloon getCloserBalloon(){
-        for(Balloon b : gm.getBalloons()) {
+        for(Balloon b : gm.balloonManager.getBalloons()) {
             Vector distance = CreateVector(b.position, this.position);
             if (distance.getMod() < this.range) {
                 return b;
