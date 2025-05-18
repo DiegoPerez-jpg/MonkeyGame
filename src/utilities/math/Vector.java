@@ -8,13 +8,13 @@ public class Vector {
         this.y = y;
     }
 
-    public double getMod() { // Devuelve el módulo del vector
-        return Math.sqrt((x * x) + (y * y) + (z * z));
+    public float getMod() { // Devuelve el módulo del vector
+        return (float) Math.sqrt((x * x) + (y * y));
     }
 
     public Vector normalize() {
-        double mod = getMod();
-        return new Vector(this.x / mod, this.y / mod, this.z / mod);
+        float mod = getMod();
+        return new Vector(this.x/mod, this.y/mod);
     }
 
 }

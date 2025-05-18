@@ -9,6 +9,7 @@ public class GameManager {
     public TileManager tileManager;
     public MonkeyManager monkeyManager;
     public BalloonManager balloonManager;
+    public BulletManager bulletManager;
     public int width, height;
     public Renderer renderer;
     public float time;
@@ -31,6 +32,7 @@ public class GameManager {
         this.tileManager = new TileManager();
         this.monkeyManager = new MonkeyManager();
         this.balloonManager = new BalloonManager();
+        this.bulletManager = new BulletManager();
         //glfwWindowShouldClose devuelve true si se cierra la ventana
         while (!glfwWindowShouldClose(renderer.getWindow())) { //Game loop
             renderer.update();

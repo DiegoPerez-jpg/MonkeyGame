@@ -7,7 +7,9 @@ import graphics.Color;
 import managers.GameManager;
 import utilities.math.Point;
 
-import java.util.Vector;
+import utilities.math.Vector;
+
+import static utilities.util.createVector;
 
 
 public class Bullet extends Entity {
@@ -34,17 +36,17 @@ public class Bullet extends Entity {
         this.target = target;
         this.time = GameManager.getInstance().time;
     }
-    public void avanzar(float t){
-        float dT = time-t;
-        Vector vectorAlglobo  = CreateVector(this.position,target.position);
-        if(vectorAlglobo.getMod()<1){
-            target.getHit((double)damage);
-            GameManager.getInstance().bulletManager.removeBullet(this);
-            return;
-        }
-        Vector vectorVelocidad = vectorAlglobo.normalize().multiply(velocity);
-
-        //X = x0 + vt
-        this.position = this.monkey.position.add(vectorVelocidad.multiply(dT));
-    }
+//    public void avanzar(float t){
+//        float dT = time-t;
+//        Vector vectorAlglobo  = createVector(this.position,target.position);
+//        if(vectorAlglobo.getMod()<1){
+//            target.getHit((double)damage);
+//            GameManager.getInstance().bulletManager.removeBullet(this);
+//            return;
+//        }
+//        Vector vectorVelocidad = vectorAlglobo.normalize().multiply(velocity);
+//
+//        //X = x0 + vt
+//        this.position = this.monkey.position.add(vectorVelocidad.multiply(dT));
+//    }
 }
