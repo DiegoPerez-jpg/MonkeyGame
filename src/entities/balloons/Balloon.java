@@ -26,26 +26,26 @@ public class Balloon extends Entity {
     public Double getAllDamage(){
         return vida + previousBallon.getAllDamage();
     }
-    public void avanzar(float t){
-        float dT = time-t;
-        Vector vectorALaesquina = util.createVector(this.position, target.posCentrada);
-
-        if(vectorALaesquina.getMod()<1){
-
-            target = GameManager.getInstance().levelManager.nextEsquina(target);
-            if(target!=null){
-
-                GameManager.getInstance().doDamage(this.getAllDamage());
-            }
-            GameManager.getInstance().balloonManager.removeBalloon(this);
-            return;
-        }
-        Point original = GameManager.getInstance().levelManager.previousEsquina(target).position;
-        Vector vectorVelocidad = vectorALaesquina.normalize().multiply(velocity);
-
-//        //X = x0 + vt
-        this.position = original.add(vectorVelocidad.multiply(dT));
-    }
+//    public void avanzar(float t){
+//        float dT = time-t;
+//        Vector vectorALaesquina = util.createVector(this.position, target.posCentrada);
+//
+//        if(vectorALaesquina.getMod()<1){
+//
+//            target = GameManager.getInstance().levelManager.nextEsquina(target);
+//            if(target!=null){
+//
+//                GameManager.getInstance().doDamage(this.getAllDamage());
+//            }
+//            GameManager.getInstance().balloonManager.removeBalloon(this);
+//            return;
+//        }
+//        Point original = GameManager.getInstance().levelManager.previousEsquina(target).position;
+//        Vector vectorVelocidad = vectorALaesquina.normalize().multiply(velocity);
+//
+////        //X = x0 + vt
+//        this.position = original.add(vectorVelocidad.multiply(dT));
+//    }
     public void getHit(Double damage){
         this.vida = this.vida-damage;
         if(this.vida <= 0){
