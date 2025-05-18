@@ -3,7 +3,9 @@ package entities.monkeys;
 import entities.Entity;
 import entities.balloons.Balloon;
 import entities.bullets.Bullet;
+import entities.bullets.BulletPrefab;
 import graphics.Color;
+import managers.GameManager;
 import utilities.math.Point;
 
 public class Monkey extends Entity {
@@ -12,13 +14,13 @@ public class Monkey extends Entity {
     float range;
     float cost;
     float rate;
-    BulletPrefab bulletPrefab;
+    BulletPrefab bp;
     GameManager gm;
     float lastShotTime;
 
-    public Monkey(int size, BulletPrefab bala, float rate, float cost, float range, String nombre, Color skin, Point position) {
+    public Monkey(int size, BulletPrefab bp, float rate, float cost, float range, String nombre, Color skin, Point position) {
         super(skin,position,size);
-        this.bala = bala;
+        this.bp = bala;
         this.rate = rate;
         this.cost = cost;
         this.range = range;

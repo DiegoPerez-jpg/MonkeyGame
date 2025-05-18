@@ -1,9 +1,12 @@
 package graphics;
 
+import graphics.terrain.Tile;
 import managers.GameManager;
+import managers.TileManager;
 import utilities.math.Point;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
+import graphics.Draw;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -12,9 +15,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class Renderer {
     private long window;
     GameManager gm;
+    TileManager tm;
 
     public Renderer(int width, int height) {
         this.gm = GameManager.getInstance();
+        this.tm = gm.tileManager;
 
         GLFWErrorCallback.createPrint(System.err).set(); //Imprime los errores que puedan ocurrir al usar GLFW *1
 
@@ -32,8 +37,8 @@ public class Renderer {
         glfwShowWindow(window);
         GL.createCapabilities(); // Habilita OpenGL
 
-        //glOrtho(0, 800, 600, 0, -1, 1); //Posiciona (0, 0) en la esquina superior izquierda
-        glOrtho(-400, 400, -300, 300, -1, 1); //Posiciona (0, 0) en el centro de la ventana
+        GL11.glOrtho(0, gm.width, 0, gm.height, -1, 1); //Posiciona (0, 0) en la esquina inferior izquierda
+        //glOrtho(-1*gm.width/2, gm.width/2, -1*gm.height, gm.height, -1, 1); //Posiciona (0, 0) en el centro de la ventana
     }
 
     public void update() {
@@ -44,6 +49,7 @@ public class Renderer {
 
     private void draw(){
         Draw.fill(Color.BLACK); //Rellena toda la pantalla de negro
+        for (Tile t : tm.tiles){Draw.drawPoly(t.corners, t.background);}
     }
 
     public void clean() { //Libera los recursos

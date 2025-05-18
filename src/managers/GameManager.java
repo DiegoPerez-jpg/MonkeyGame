@@ -6,12 +6,13 @@ import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 public class GameManager {
     private static GameManager instance;
     public InputManager inputManager;
+    public TileManager tileManager;
     public int width, height;
     public Renderer renderer;
 
     private GameManager(){
-        this.width = 800;
-        this.height = 600;
+        this.width = 1000;
+        this.height = 800;
     }
 
     public static GameManager getInstance() {
@@ -23,6 +24,7 @@ public class GameManager {
         //Estas clases llaman al gm en sus constructores por lo que no pueden ser creadas en el contructor del gm
         this.renderer = new Renderer(width, height);
         this.inputManager = new InputManager();
+        this.tileManager = new TileManager();
         //glfwWindowShouldClose devuelve true si se cierra la ventana
         while (!glfwWindowShouldClose(renderer.getWindow())) { //Game loop
             renderer.update();

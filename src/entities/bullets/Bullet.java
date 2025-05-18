@@ -23,7 +23,7 @@ public class Bullet extends Entity {
         super(bt.skin,position,bt.size);
         this.velocity = bt.velocity;
         this.damage = bt.damage;
-        this.bulletType = bt.bulletType;
+        //this.bulletType = bt.bulletType;
         this.target = target;
     }
     public void avanzarBala(){
