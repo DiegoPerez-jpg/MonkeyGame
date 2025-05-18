@@ -5,11 +5,14 @@ import graphics.Color;
 import managers.GameManager;
 import utilities.math.Point;
 
+import java.util.Vector;
+
 public class Balloon extends Entity {
     Double vida;
     Balloon previousBallon;
     String tipo;
     BalloonManager bm;
+    Tile target;
     public Balloon(Color skin, Point position, int size, Double vida, Balloon previousBallon, String tipo) {
         super(skin, position, size);
         this.vida = vida;
@@ -17,7 +20,22 @@ public class Balloon extends Entity {
         this.tipo = tipo;
     }
     public void avanzar(float t){
+        float dT = time-t;
+        Vector vectorALaesquina = CreateVector(this.position,target.posCentrada);
 
+        if(vectorALaesquina.getMod()<1){
+
+            target = GameManager.getInstance().tileManager.nextEsquina(target);
+            if(target!=null){
+                GameManager.doDamage(vida);
+            }
+            GameManager.getInstance().balloonManager.removeBalloon(this);
+            return;
+        }
+        Vector vectorVelocidad = vectorALaesquina.normalize().multiply(velocity);
+
+        //X = x0 + vt
+        this.position = this.monkey.position.add(vectorVelocidad.multiply(dT));
     }
     public void getHit(Double damage){
         this.vida = this.vida-damage;
