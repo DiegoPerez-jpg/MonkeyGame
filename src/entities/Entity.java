@@ -1,5 +1,6 @@
 package entities;
 
+import entities.monkeys.Monkey;
 import graphics.Color;
 import utilities.math.Point;
 

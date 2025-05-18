@@ -11,10 +11,12 @@ public class GameManager {
     public BalloonManager balloonManager;
     public int width, height;
     public Renderer renderer;
+    public float time;
 
     private GameManager(){
         this.width = 1000;
         this.height = 800;
+        this.time = 0;
     }
 
     public static GameManager getInstance() {

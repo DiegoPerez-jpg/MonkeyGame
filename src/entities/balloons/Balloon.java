@@ -2,40 +2,62 @@ package entities.balloons;
 
 import entities.Entity;
 import graphics.Color;
+import graphics.terrain.Tile;
 import managers.BalloonManager;
 import managers.GameManager;
 import utilities.math.Point;
+import utilities.util;
+import utilities.math.Vector;
 
 public class Balloon extends Entity {
     Double vida;
-    Balloon previousBalloon;
+    Balloon previousBallon;
     String tipo;
-    BalloonManager bm;
-    public Balloon(Color skin, Point position, int size, Double vida, Balloon previousBalloon, String tipo) {
+    Tile target;
+    float time;
+    public Balloon(Color skin, Point position, int size, Double vida, Balloon previousBallon, String tipo) {
         super(skin, position, size);
         this.vida = vida;
-        this.previousBalloon = previousBalloon;
+        this.previousBallon = previousBallon;
         this.tipo = tipo;
-        this.bm = GameManager.getInstance().balloonManager;
+        this.time = GameManager.getInstance().time;
     }
-    public void avanzar(float t){
-
+    public Double getAllDamage(){
+        return vida + previousBallon.getAllDamage();
     }
+//    public void avanzar(float t){
+//        float dT = time-t;
+//        Vector vectorALaesquina = util.createVector(this.position, target.posCentrada);
+//
+//        if(vectorALaesquina.getMod()<1){
+//
+//            target = GameManager.getInstance().tileManager.nextEsquina(target);
+//            if(target!=null){
+//
+//                GameManager.doDamage(this.getAllDamage());
+//            }
+//            GameManager.getInstance().balloonManager.removeBalloon(this);
+//            return;
+//        }
+//        Vector vectorVelocidad = vectorALaesquina.normalize().multiply(velocity);
+//
+//        //X = x0 + vt
+//        this.position = this.monkey.position.add(vectorVelocidad.multiply(dT));
+//    }
     public void getHit(Double damage){
         this.vida = this.vida-damage;
         if(this.vida <= 0){
-            if(this.previousBalloon != null){
+            if(this.previousBallon != null){
                 unTransformBalloon();
             }
-            bm.removeBalloon(this);
+            GameManager.getInstance().balloonManager.removeBalloon(this);
         }
     }
-
     private void unTransformBalloon(){
-        this.vida = this.previousBalloon.vida;
-        this.tipo = this.previousBalloon.tipo;
-        super.skin = this.previousBalloon.skin;
-        super.size = this.previousBalloon.size;
-        this.previousBalloon = this.previousBalloon.previousBalloon;
+        this.vida = this.previousBallon.vida;
+        this.tipo = this.previousBallon.tipo;
+        super.skin = this.previousBallon.skin;
+        super.size = this.previousBallon.size;
+        this.previousBallon = this.previousBallon.previousBallon;
     }
 }
