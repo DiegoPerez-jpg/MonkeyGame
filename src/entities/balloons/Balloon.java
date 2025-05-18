@@ -13,11 +13,16 @@ public class Balloon extends Entity {
     String tipo;
     BalloonManager bm;
     Tile target;
+    float time;
     public Balloon(Color skin, Point position, int size, Double vida, Balloon previousBallon, String tipo) {
         super(skin, position, size);
         this.vida = vida;
         this.previousBallon = previousBallon;
         this.tipo = tipo;
+        this.time = GameManager.getInstance().time;
+    }
+    public Double getAllDamage(){
+        return vida + previousBallon.getAllDamage();
     }
     public void avanzar(float t){
         float dT = time-t;
@@ -27,7 +32,8 @@ public class Balloon extends Entity {
 
             target = GameManager.getInstance().tileManager.nextEsquina(target);
             if(target!=null){
-                GameManager.doDamage(vida);
+
+                GameManager.doDamage(this.getAllDamage());
             }
             GameManager.getInstance().balloonManager.removeBalloon(this);
             return;
