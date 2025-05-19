@@ -1,13 +1,11 @@
 package graphics;
 
 import entities.balloons.Balloon;
+import entities.bullets.Bullet;
 import entities.monkeys.Monkey;
 import graphics.surface.AsideUI;
 import graphics.terrain.Tile;
-import managers.BalloonManager;
-import managers.GameManager;
-import managers.MonkeyManager;
-import managers.TileManager;
+import managers.*;
 import utilities.math.Point;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
@@ -32,12 +30,14 @@ public class Renderer {
     TileManager tm;
     MonkeyManager mm;
     BalloonManager bm;
+    BulletManager bulletManager;
 
     public Renderer(int width, int height) {
         this.gm = GameManager.getInstance();
         this.tm = gm.tileManager;
         this.mm = gm.monkeyManager;
         this.bm = gm.balloonManager;
+        this.bulletManager = gm.bulletManager;
 
         GLFWErrorCallback.createPrint(System.err).set(); //Imprime los errores que puedan ocurrir al usar GLFW *1
 
@@ -77,7 +77,7 @@ public class Renderer {
         //Render interfaces
         Draw.drawPoly(gm.asideUI.corners, gm.asideUI.background);
         Draw.drawPoly(gm.bottomUI.corners, gm.bottomUI.background);
-        Draw.drawText("Mario cuantas horas de sistemas necesito", new Point(50, 50));
+        for(Bullet b : bulletManager.getBullets()){b.skin.render(b.position);}
     }
 
     public void clean() { //Libera los recursos

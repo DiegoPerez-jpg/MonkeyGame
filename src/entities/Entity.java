@@ -14,4 +14,8 @@ public class Entity {
         this.position = position;
         this.size = size;
     }
+
+    public void setSkin(String skin) {
+        this.skin = new Texture(skin);
+    }
 }

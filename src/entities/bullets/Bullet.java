@@ -21,33 +21,43 @@ public class Bullet extends Entity {
     public Monkey monkey;
     public float time;
 
-    public Bullet(Point position, float velocity, int size, float damage, float bulletType, Balloon target) {
+    public Bullet(Point position, float velocity, int size, float damage, float bulletType, Balloon target,Monkey monkey) {
         super(new Texture(""), position, size);
+        this.monkey = monkey;
         this.velocity = velocity;
         this.damage = damage;
         this.bulletType = bulletType;
         this.target = target;
         this.time = (float)GameManager.getInstance().timer.getTime();
     }
-    public Bullet(BulletPrefab bp, Point position, Balloon target) {
+    public Bullet(BulletPrefab bp, float damage, Point position, Balloon target,Monkey monkey) {
         super(bp.skin, position, bp.size);
         this.velocity = bp.velocity;
-        this.damage = bp.damage;
+        this.monkey = monkey;
+        this.damage = damage;
         //this.bulletType = bp.bulletType;
         this.target = target;
-        this.time = GameManager.getInstance().time;
+        this.time = (float)GameManager.getInstance().timer.getTime();
     }
-    public void avanzar(float t){
-        float dT = time-t;
-        Vector vectorAlglobo  = createVector(this.position,target.position);
-        if(vectorAlglobo.getMod()<1){
-            target.getHit((double)damage);
-            GameManager.getInstance().bulletManager.removeBullet(this);
-            return;
+    public boolean avanzar(float t) {
+        if(GameManager.getInstance().balloonManager.searchBalloon(target) ==-1){
+            return true;
         }
-        Vector vectorVelocidad = vectorAlglobo.normalize().multiply(velocity);
+        //diferencia tiempo
+        float dT = t - time;
+        this.time = t;
 
-        //X = x0 + vt
-        this.position = this.monkey.position.add(vectorVelocidad.multiply(dT));
+        Vector vectorAlGlobo = createVector(target.position, this.position);
+        if (vectorAlGlobo.getMod() < 5) {
+            target.getHit(damage);
+            return true; // Se elimina la bala
+        }
+
+        Vector vectorVelocidad = vectorAlGlobo.normalize().multiply(velocity);
+
+        // x = x0 + vt
+        this.position = this.position.add(vectorVelocidad.multiply(dT));
+
+        return false;
     }
 }

@@ -18,19 +18,19 @@ public class Monkey extends Entity {
     float cost;
     float rate;
     BulletPrefab bp;
-    GameManager gm;
     float lastShotTime;
-
+    int[] mejoras;
     public Monkey(int size, BulletPrefab bp, float rate, float cost, float range, String nombre, String skin, Tile tile) {
         super((new Texture(skin)), tile.getPosition(),size);
+        mejoras = new int[]{0,0,0};
         this.bp = bp;
         this.rate = rate;
         this.cost = cost;
-        this.range = range;
+        this.range = range*GameManager.getInstance().tileSize;
         this.nombre = nombre;
     }
-    private Balloon getCloserBalloon(){
-        for(Balloon b : gm.balloonManager.getBalloons()) {
+    protected Balloon getCloserBalloon(){
+        for(Balloon b : GameManager.getInstance().balloonManager.getBalloons()) {
             Vector distance = util.createVector(b.position, this.position);
             if (distance.getMod() < this.range) {
                 return b;
@@ -39,13 +39,17 @@ public class Monkey extends Entity {
         return null;
     }
     public Bullet disparar(float time){
-        if(time-lastShotTime>rate){
+        if(time-lastShotTime>rate || lastShotTime==0){
             Balloon b = this.getCloserBalloon();
             if(b!=null){
                 lastShotTime = time;
-                return new Bullet(bp, this.position, b);
+                return new Bullet(bp,1 , this.position, b,this);
             }
         }
         return null;
+    }
+
+    public void setRate(float rate) {
+        this.rate = rate;
     }
 }

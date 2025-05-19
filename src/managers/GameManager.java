@@ -2,6 +2,7 @@ package managers;
 
 import entities.bullets.BulletPrefab;
 import entities.monkeys.Monkey;
+import entities.monkeys.TribeMonkey;
 import graphics.Color;
 import graphics.Renderer;
 import graphics.surface.AsideUI;
@@ -59,7 +60,12 @@ public class GameManager {
         this.bulletManager = new BulletManager();
         this.renderer = new Renderer(width, height);
         this.inputManager = new InputManager();
+<<<<<<< HEAD
         balloonManager.addBalloon(new Balloon( 4, 4.0, "",100));
+=======
+        monkeyManager.addMonkey(new TribeMonkey(tileManager.searchTile(4,5)));
+        //glfwWindowShouldClose devuelve true si se cierra la ventana
+>>>>>>> dde7d6101487fb535f891243c2459d44c840e1e3
         getCurrentLevel().crearCamino();
         //sentido antihorario empezando por arriba la izq
         this.asideUI = new AsideUI(Color.BLUEUI, new ArrayList<>() {{
@@ -80,6 +86,8 @@ public class GameManager {
             renderer.update();
             inputManager.update();
             balloonManager.updateBalloons();
+            monkeyManager.updateMonkey();
+            bulletManager.updateBullets();
         }
         renderer.clean();
     }
