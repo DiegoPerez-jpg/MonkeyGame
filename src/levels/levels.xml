@@ -2,9 +2,23 @@
 
 <levels>
     <level>
-        <id></id>
+        <id>1</id>
+        <!--Esquinas en los caminos + la entrada y la salida de los globos-->
         <corners> <!--Tablero de 20x15, formato x-y, esquina inf izq 1-1, esquina sup dcha 20-15-->
-            <corner></corner> 
+            <corner>1-10</corner> <!--Casilla de entrada de los globos-->
+            <corner>6-10</corner>
+            <corner>6-14</corner>
+            <corner>8-14</corner>
+            <corner>8-6</corner>
+            <corner>6-6</corner>
+            <corner>6-4</corner>
+            <corner></corner>
+            <corner></corner>
+            <corner></corner>
+            <corner></corner>
+            <corner></corner>
+            <corner></corner>
+            <corner></corner> <!--Casilla de entrada de los globos-->
         </corners>
     </level>
 </levels>
