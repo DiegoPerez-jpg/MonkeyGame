@@ -21,8 +21,12 @@ public class BulletManager {
     }
     public void updateBullets() {
         float t = (float)GameManager.getInstance().timer.getTime();
+        ArrayList<Bullet> borrarBullets = new ArrayList<>();
         for (Bullet b : bullets) {
-            b.avanzar(t);
+            if(b.avanzar(t)){
+                borrarBullets.add(b);
+            }
         }
+        bullets.removeAll(borrarBullets);
     }
 }

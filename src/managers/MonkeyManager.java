@@ -1,5 +1,6 @@
 package managers;
 
+import entities.bullets.Bullet;
 import entities.monkeys.Monkey;
 
 import java.util.ArrayList;
@@ -22,7 +23,10 @@ public class MonkeyManager {
     public void updateMonkey() {
         float t = (float)GameManager.getInstance().timer.getTime();
         for(Monkey m : monkeys) {
-            m.disparar(t);
+            Bullet b = m.disparar(t);
+            if(b != null) {
+                GameManager.getInstance().bulletManager.addBullet(b);
+            }
         }
     }
 }

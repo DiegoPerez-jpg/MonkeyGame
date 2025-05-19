@@ -50,7 +50,7 @@ public class Balloon extends Entity {
         this.position = original.add(vectorVelocidad.multiply(dT));
 
     }
-    public void getHit(Double damage){
+    public void getHit(double damage){
         this.vida = this.vida-damage;
         if(this.vida <= 0){
             if(this.previousBallon != null){

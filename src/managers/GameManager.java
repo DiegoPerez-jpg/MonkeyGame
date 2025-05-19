@@ -61,12 +61,14 @@ public class GameManager {
         levelManager.crearCamino();
 
         balloonManager.addBalloon(new Balloon(new Point(0, 0), 4, 4.0, "",100));
-        monkeyManager.addMonkey(new Monkey(1, BulletPrefab.BULLET,1,1,1,"normal","src/assets/monkeyDarderolvl1.png",t2));
+        monkeyManager.addMonkey(new Monkey(1, BulletPrefab.BULLET,1,1,3*tileSize,"normal","src/assets/monkeyDarderolvl1.png",t2));
         //glfwWindowShouldClose devuelve true si se cierra la ventana
         while (!glfwWindowShouldClose(renderer.getWindow())) { //Game loop
             renderer.update();
             inputManager.update();
             balloonManager.updateBalloons();
+            monkeyManager.updateMonkey();
+            bulletManager.updateBullets();
         }
         renderer.clean();
     }
