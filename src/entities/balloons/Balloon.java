@@ -12,7 +12,6 @@ import utilities.math.Vector;
 
 public class Balloon extends Entity {
     Double vida;
-    Balloon previousBallon;
     String tipo;
     public Tile target;
     float velocity;
@@ -25,9 +24,7 @@ public class Balloon extends Entity {
         this.tipo = tipo;
         this.time = (float)GameManager.getInstance().timer.getTime();
         this.target = GameManager.getInstance().getCurrentLevel().getEquinas().get(0);
-    }
-    public Double getAllDamage(){
-        return vida + previousBallon.getAllDamage();
+        actualizar_skin();
     }
     public void avanzar(float t){
         float dT = t-time;
@@ -39,7 +36,7 @@ public class Balloon extends Entity {
 
             if(target==null){
 
-                GameManager.getInstance().doDamage( this.getAllDamage());
+                GameManager.getInstance().doDamage( this.vida);
                 GameManager.getInstance().balloonManager.removeBalloon(this);
             }
             return;
@@ -52,18 +49,12 @@ public class Balloon extends Entity {
     }
     public void getHit(double damage){
         this.vida = this.vida-damage;
+        this.actualizar_skin();
         if(this.vida <= 0){
-            if(this.previousBallon != null){
-                unTransformBalloon();
-            }
             GameManager.getInstance().balloonManager.removeBalloon(this);
         }
     }
-    private void unTransformBalloon(){
-        this.vida = this.previousBallon.vida;
-        this.tipo = this.previousBallon.tipo;
-        super.skin = this.previousBallon.skin;
-        super.size = this.previousBallon.size;
-        this.previousBallon = this.previousBallon.previousBallon;
+    public void actualizar_skin(){
+        this.setSkin("src/assets/Balloon.png");
     }
 }

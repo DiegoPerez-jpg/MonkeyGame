@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 public class MonkeyManager {
     ArrayList<Monkey> monkeys;
+    public float dañoTribu;
+    public float rateTribu;
     public MonkeyManager() {
         monkeys = new ArrayList<Monkey>();
     }

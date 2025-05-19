@@ -2,6 +2,7 @@ package managers;
 
 import entities.bullets.BulletPrefab;
 import entities.monkeys.Monkey;
+import entities.monkeys.TribeMonkey;
 import graphics.Color;
 import graphics.Renderer;
 import graphics.terrain.Tile;
@@ -49,14 +50,16 @@ public class GameManager {
         this.bulletManager = new BulletManager();
         this.renderer = new Renderer(width, height);
         this.inputManager = new InputManager();
-        balloonManager.addBalloon(new Balloon( 4, 4.0, "",100));
-        //monkeyManager.addMonkey(new Monkey(1, BulletPrefab.BULLET,1,1,1,"normal","src/assets/monkeyDarderolvl1.png",t2));
+        balloonManager.addBalloon(new Balloon( 4, 1.0, "",100));
+        monkeyManager.addMonkey(new TribeMonkey(tileManager.searchTile(4,5)));
         //glfwWindowShouldClose devuelve true si se cierra la ventana
         getCurrentLevel().crearCamino();
         while (!glfwWindowShouldClose(renderer.getWindow())) { //Game loop
             renderer.update();
             inputManager.update();
             balloonManager.updateBalloons();
+            monkeyManager.updateMonkey();
+            bulletManager.updateBullets();
         }
         renderer.clean();
     }
