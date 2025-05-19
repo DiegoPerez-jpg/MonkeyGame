@@ -23,11 +23,11 @@ public class Level {
             }
             if(anterior.getCasilla().x!= tile.getCasilla().x){
                 if(anterior.getCasilla().x<tile.getCasilla().x){
-                    for (float i = anterior.getCasilla().x; i < tile.getCasilla().x; i++) {
+                    for (float i = anterior.getCasilla().x; i <= tile.getCasilla().x; i++) {
                         tm.searchTile(i,anterior.getCasilla().y).toRoad();
                     }
                 } else {
-                    for (float i = tile.getCasilla().x; i < anterior.getCasilla().x+1; i++) {
+                    for (float i = tile.getCasilla().x; i <= anterior.getCasilla().x; i++) {
                         tm.searchTile(i,anterior.getCasilla().y).toRoad();
                     }
                 }
@@ -35,11 +35,11 @@ public class Level {
             }
             if(anterior.getCasilla().y!= tile.getCasilla().y){
                 if(anterior.getCasilla().y<tile.getCasilla().y){
-                    for (float i = anterior.getCasilla().y; i < tile.getCasilla().y; i++) {
+                    for (float i = anterior.getCasilla().y; i <= tile.getCasilla().y; i++) {
                         tm.searchTile(anterior.getCasilla().x,i).toRoad();
                     }
                 } else {
-                    for (float i = tile.getCasilla().y; i < anterior.getCasilla().y+1; i++) {
+                    for (float i = tile.getCasilla().y; i <= anterior.getCasilla().y; i++) {
                         tm.searchTile(anterior.getCasilla().x,i).toRoad();
                     }
                 }
