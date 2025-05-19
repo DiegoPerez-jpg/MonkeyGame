@@ -7,13 +7,19 @@ import utilities.math.Point;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import graphics.Draw;
-
 import java.util.ArrayList;
+import org.lwjgl.stb.STBImage;
+import org.lwjgl.system.MemoryStack;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
+
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.opengl.GL30.glGenerateMipmap;
+
 
 public class Renderer {
     private long window;
@@ -52,7 +58,9 @@ public class Renderer {
     }
 
     private void draw(){
-        for (Tile t : tm.tiles){Draw.drawPoly(t.corners, t.background);}
+        //for (Tile t : tm.tiles){Draw.drawPoly(t.corners, t.background);}
+
+
     }
 
     public void clean() { //Libera los recursos
