@@ -17,14 +17,14 @@ public class Balloon extends Entity {
     public Tile target;
     float velocity;
     float time;
-    public Balloon(Point position, int size, Double vida, String tipo, float velocity) {
-        super(new Texture("src/assets/Balloon.png"), position, size);
+    public Balloon(int size, Double vida, String tipo, float velocity) {
+        super(new Texture("src/assets/Balloon.png"), GameManager.getInstance().getCurrentLevel().getEquinas().get(0).getPosition(), size);
         this.vida = vida;
         this.velocity = velocity;
         //this.previousBallon = previousBallon;
         this.tipo = tipo;
         this.time = (float)GameManager.getInstance().timer.getTime();
-        this.target = GameManager.getInstance().levelManager.getEquinas().get(0);
+        this.target = GameManager.getInstance().getCurrentLevel().getEquinas().get(0);
     }
     public Double getAllDamage(){
         return vida + previousBallon.getAllDamage();
@@ -34,7 +34,7 @@ public class Balloon extends Entity {
         Vector vectorALaesquina = util.createVector(target.getPosition(),this.position);
         if(vectorALaesquina.getMod()<1){
 
-            target = GameManager.getInstance().levelManager.nextEsquina(target);
+            target = GameManager.getInstance().balloonManager.nextEsquina(target);
             this.time = t;
 
             if(target==null){
@@ -44,7 +44,7 @@ public class Balloon extends Entity {
             }
             return;
         }
-        Point original = GameManager.getInstance().levelManager.previousEsquina(target).getPosition();
+        Point original = GameManager.getInstance().balloonManager.previousEsquina(target).getPosition();
         Vector vectorVelocidad = vectorALaesquina.normalize().multiply(velocity);
 //        //X = x0 + vt
         this.position = original.add(vectorVelocidad.multiply(dT));

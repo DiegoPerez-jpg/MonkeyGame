@@ -5,6 +5,7 @@ import entities.monkeys.Monkey;
 import graphics.Color;
 import graphics.Renderer;
 import graphics.terrain.Tile;
+import levels.Level;
 import utilities.Timer;
 import utilities.math.Point;
 import entities.balloons.Balloon;
@@ -42,38 +43,25 @@ public class GameManager {
     public void play(){
         //Estas clases llaman al gm en sus constructores por lo que no pueden ser creadas en el contructor del gm
         this.tileManager = new TileManager();
+        this.levelManager = new LevelManager();
         this.monkeyManager = new MonkeyManager();
         this.balloonManager = new BalloonManager();
         this.bulletManager = new BulletManager();
         this.renderer = new Renderer(width, height);
         this.inputManager = new InputManager();
-        this.levelManager = new LevelManager(new ArrayList<>());
-        Tile t = new Tile(Color.ROAD,new Point(1,1));
-        Tile t2 = new Tile(Color.ROAD,new Point(10,1));
-        levelManager.add(t);
-        levelManager.add(t2);
-        levelManager.add(new Tile(Color.ROAD,new Point(10,5)));
-        levelManager.add(new Tile(Color.ROAD,new Point(15,5)));
-        levelManager.add(new Tile(Color.ROAD,new Point(15,10)));
-        levelManager.add(new Tile(Color.ROAD,new Point(10,10)));
-        levelManager.add(new Tile(Color.ROAD,new Point(10,15)));
-        levelManager.add(new Tile(Color.ROAD,new Point(12,15)));
-        levelManager.crearCamino();
-
-        balloonManager.addBalloon(new Balloon(new Point(0, 0), 4, 4.0, "",100));
-        monkeyManager.addMonkey(new Monkey(1, BulletPrefab.BULLET,1,1,3*tileSize,"normal","src/assets/monkeyDarderolvl1.png",t2));
+        balloonManager.addBalloon(new Balloon( 4, 4.0, "",100));
+        //monkeyManager.addMonkey(new Monkey(1, BulletPrefab.BULLET,1,1,1,"normal","src/assets/monkeyDarderolvl1.png",t2));
         //glfwWindowShouldClose devuelve true si se cierra la ventana
+        getCurrentLevel().crearCamino();
         while (!glfwWindowShouldClose(renderer.getWindow())) { //Game loop
             renderer.update();
             inputManager.update();
             balloonManager.updateBalloons();
-            monkeyManager.updateMonkey();
-            bulletManager.updateBullets();
         }
         renderer.clean();
     }
 
-    public void doDamage(double damage){
-        this.vida = vida - damage;
-    }
+    public void doDamage(double damage){this.vida = vida - damage;}
+
+    public Level getCurrentLevel(){return levelManager.currentLevel;}
 }
