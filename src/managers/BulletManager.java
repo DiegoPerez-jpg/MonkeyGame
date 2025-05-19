@@ -19,10 +19,10 @@ public class BulletManager {
     public ArrayList<Bullet> getBullets() {
         return bullets;
     }
-//    public void updateBullets() {
-//        float t = GameManager.getInstance().time;
-//        for (Bullet b : bullets) {
-//            b.avanzar(t);
-//        }
-//    }
+    public void updateBullets() {
+        float t = GameManager.getInstance().time;
+        for (Bullet b : bullets) {
+            b.avanzar(t);
+        }
+    }
 }
