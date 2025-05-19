@@ -12,7 +12,9 @@ public enum Color {
     GREY(128f, 128f, 128f),
     ORANGE(255f, 165f, 0f),
     GRASS(167f, 201f, 87f),
-    ROAD(229, 206, 144);
+    ROAD(229, 206, 144),
+    BLUEUI(110, 145, 185),
+    BLUEUI2(95, 125, 160);
 
     public final float r, g, b;
 

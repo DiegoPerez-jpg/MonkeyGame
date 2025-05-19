@@ -2,6 +2,7 @@ package graphics;
 
 import entities.balloons.Balloon;
 import entities.monkeys.Monkey;
+import graphics.surface.AsideUI;
 import graphics.terrain.Tile;
 import managers.BalloonManager;
 import managers.GameManager;
@@ -73,6 +74,10 @@ public class Renderer {
         for (Tile t : tm.tiles){Draw.drawPoly(t.corners, t.background);}
         for (Monkey t : mm.getMonkeys()){t.skin.render(t.position);}
         for (Balloon b : bm.getBalloons()){b.skin.render(b.position);}
+        //Render interfaces
+        Draw.drawPoly(gm.asideUI.corners, gm.asideUI.background);
+        Draw.drawPoly(gm.bottomUI.corners, gm.bottomUI.background);
+        Draw.drawText("Mario cuantas horas de sistemas necesito", new Point(50, 50));
     }
 
     public void clean() { //Libera los recursos

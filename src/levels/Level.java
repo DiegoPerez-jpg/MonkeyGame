@@ -3,7 +3,6 @@ package levels;
 import graphics.terrain.Tile;
 import managers.GameManager;
 import managers.TileManager;
-import utilities.math.Point;
 import java.util.ArrayList;
 
 public class Level {

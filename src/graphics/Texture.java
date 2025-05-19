@@ -44,16 +44,18 @@ public class Texture {
         this.texId = textureID;
     }
 
-    public void render(Point p) {
+    public void render(Point p, int scale){
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, texId);
         glBegin(GL_QUADS);
         glTexCoord2f(0.0f, 0.0f); glVertex2f(p.x, p.y);         // Abajo izquierda
-        glTexCoord2f(1.0f, 0.0f); glVertex2f(p.x + width, p.y);     // Abajo derecha
-        glTexCoord2f(1.0f, 1.0f); glVertex2f(p.x + width, p.y + height); // Arriba derecha
-        glTexCoord2f(0.0f, 1.0f); glVertex2f(p.x, p.y + height);     // Arriba izquierda
+        glTexCoord2f(1.0f, 0.0f); glVertex2f(p.x + width*scale, p.y);     // Abajo derecha
+        glTexCoord2f(1.0f, 1.0f); glVertex2f(p.x + width*scale, p.y + height*scale); // Arriba derecha
+        glTexCoord2f(0.0f, 1.0f); glVertex2f(p.x, p.y + height*scale);     // Arriba izquierda
         glEnd();
 
         glDisable(GL_TEXTURE_2D);
     }
+
+    public void render(Point p) {render(p,1);}
 }

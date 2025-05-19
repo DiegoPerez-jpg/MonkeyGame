@@ -34,8 +34,8 @@ public class Draw {
         glColor3f(1f, 1f, 1f); //Restablezco el siguiente color a un color neutral
     }
 
-    public static void drawLine(Point start, Point end, Color color) {
-        glLineWidth(5);
+    public static void drawLine(Point start, Point end, Color color, int size) {
+        glLineWidth(size);
         glColor3f(color.r/255, color.g/255, color.b/255);
         glBegin(GL_LINES);
             glVertex2f(start.x, start.y);
@@ -43,8 +43,8 @@ public class Draw {
         glEnd();
         glColor3f(1f, 1f, 1f); //Restablezco el siguiente color a un color neutral
     }
-    public static void drawLine(Point start, Point end, Float[] rgb) {
-        glLineWidth(5);
+    public static void drawLine(Point start, Point end, Float[] rgb, int size) {
+        glLineWidth(size);
         glColor3f(rgb[0]/255, rgb[1]/255, rgb[2]/255);
         glBegin(GL_LINES);
             glVertex2f(start.x, start.y);
@@ -68,4 +68,25 @@ public class Draw {
         glEnd();
         glColor3f(1f, 1f, 1f); //Restablezco el siguiente color a un color neutral
     }
+
+    public static void drawBorderPoly(ArrayList<Point> points, Color color, int borderSize, Color colorLine) {
+        drawPoly(points, color);
+        drawLine(points.get(0), points.get(1), colorLine, borderSize);
+        drawLine(points.get(1), points.get(2), colorLine, borderSize);
+        drawLine(points.get(2), points.get(3), colorLine, borderSize);
+        drawLine(points.get(3), points.get(0), colorLine, borderSize);
+    }
+
+    public static void drawBorderPoly(ArrayList<Point> points, Color color, int borderSize){
+        drawBorderPoly(points, color, borderSize, Color.BLACK);
+    }
+
+    public static void drawText(String text, Point pos, int size, int letSpace) {
+        int i = 0;
+        for (char c : text.toCharArray()) {
+            if (c != ' ') new Texture("src/assets/alphabet/" + c +".png").render(new Point(pos.x+i, pos.y), size);
+            i += (5 + letSpace)*size;
+        }
+    }
+    public static void drawText(String text, Point pos) {drawText(text, pos, 1, 2);}
 }

@@ -14,9 +14,10 @@ public class Tile { // 32x32 px each
     boolean isGrass;
     Monkey monkey;
     public Tile(Color background, Point casilla) {
-        int ts = GameManager.getInstance().tileSize;
+        int ts = GameManager.getInstance().tileSize; //Ancho del tile
+        int ey = GameManager.getInstance().extension_y; //Extensión vertical de la UI
         this.background = background;
-        this.position = new Point((casilla.x-1)*ts, (casilla.y-1)*ts); //Posición relativa a abajo a la izq
+        this.position = new Point((casilla.x-1)*ts, ((casilla.y-1)*ts)+ey); //Posición relativa a abajo a la izq
         this.corners = new ArrayList<>();
         //Importante puntos en sentido antihorario empezando por arriba a la izq
         corners.add(new Point(position.x, position.y+ts));
@@ -37,7 +38,9 @@ public class Tile { // 32x32 px each
         this.isGrass = true;
     }
     public Point getCasilla(){
-        return new Point((this.getPosition().x/GameManager.getInstance().tileSize+1), this.getPosition().y/GameManager.getInstance().tileSize+1);}
+        GameManager gm = GameManager.getInstance();
+        return new Point(((this.getPosition().x/gm.tileSize)+1), ((this.getPosition().y-gm.extension_y)/gm.tileSize)+1);
+    }
     public Point getPosition() {return position;}
-    public Point getCentre() {return new Point(position.x+GameManager.getInstance().tileSize/2, position.y+GameManager.getInstance().tileSize/2);} //Posición relativa al centro del tile
+    public Point getCentre() {return new Point(position.x+GameManager.getInstance().tileSize/2f, position.y+GameManager.getInstance().tileSize/2f);} //Posición relativa al centro del tile
 }

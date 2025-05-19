@@ -4,6 +4,8 @@ import entities.bullets.BulletPrefab;
 import entities.monkeys.Monkey;
 import graphics.Color;
 import graphics.Renderer;
+import graphics.surface.AsideUI;
+import graphics.surface.BottomUI;
 import graphics.terrain.Tile;
 import levels.Level;
 import utilities.Timer;
@@ -23,14 +25,22 @@ public class GameManager {
     public BulletManager bulletManager;
     public LevelManager levelManager;
     public int width, height;
+    public int gameWidth, gameHeight;
+    public int extension_x, extension_y;
     public Renderer renderer;
     public float time;
     public double vida;
     public int tileSize;
     public Timer timer;
+    public AsideUI asideUI;
+    public BottomUI bottomUI;
     private GameManager(){
-        this.width = 640;
-        this.height = 480;
+        this.gameWidth = 640;
+        this.gameHeight = 480;
+        this.extension_x = 256; //Extensión de la interfaz derecha
+        this.extension_y = 128; //Extensión de la interfaz inferior
+        this.width = gameWidth + extension_x;
+        this.height = gameHeight + extension_y;
         this.timer = new Timer();
         this.tileSize = 32;
     }
@@ -40,7 +50,7 @@ public class GameManager {
         return instance;
     }
 
-    public void play(){
+    private void init() {
         //Estas clases llaman al gm en sus constructores por lo que no pueden ser creadas en el contructor del gm
         this.tileManager = new TileManager();
         this.levelManager = new LevelManager();
@@ -50,9 +60,22 @@ public class GameManager {
         this.renderer = new Renderer(width, height);
         this.inputManager = new InputManager();
         balloonManager.addBalloon(new Balloon( 4, 4.0, "",100));
-        //monkeyManager.addMonkey(new Monkey(1, BulletPrefab.BULLET,1,1,1,"normal","src/assets/monkeyDarderolvl1.png",t2));
-        //glfwWindowShouldClose devuelve true si se cierra la ventana
         getCurrentLevel().crearCamino();
+        //sentido antihorario empezando por arriba la izq
+        this.asideUI = new AsideUI(Color.BLUEUI, new ArrayList<>() {{
+            add(new Point(gameWidth, height)); add(new Point(gameWidth, extension_y));
+            add(new Point(width, extension_y)); add(new Point(width, height));
+        }});
+        this.bottomUI = new BottomUI(Color.BLUEUI2, new ArrayList<>() {{
+            add(new Point(0, extension_y)); add(new Point(0, 0));
+            add(new Point(width, 0)); add(new Point(width, extension_y));
+        }});
+
+    }
+
+    public void play(){
+        init();
+        //glfwWindowShouldClose devuelve true si se cierra la ventana
         while (!glfwWindowShouldClose(renderer.getWindow())) { //Game loop
             renderer.update();
             inputManager.update();
