@@ -27,7 +27,7 @@ public class Bullet extends Entity {
         this.damage = damage;
         this.bulletType = bulletType;
         this.target = target;
-        this.time = GameManager.getInstance().time;
+        this.time = (float)GameManager.getInstance().timer.getTime();
     }
     public Bullet(BulletPrefab bp, Point position, Balloon target) {
         super(bp.skin, position, bp.size);

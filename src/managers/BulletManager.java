@@ -20,7 +20,7 @@ public class BulletManager {
         return bullets;
     }
     public void updateBullets() {
-        float t = GameManager.getInstance().time;
+        float t = (float)GameManager.getInstance().timer.getTime();
         for (Bullet b : bullets) {
             b.avanzar(t);
         }

@@ -3,7 +3,7 @@ package utilities;
 public class Timer {
     double startTime;
 
-    public Timer() {this.startTime = System.nanoTime()/1_000_000.0;}
+    public Timer() {this.startTime = System.nanoTime()/1_000_000_000.0;}
 
     public void start() {startTime = System.nanoTime()/1_000_000_000.0;}
 

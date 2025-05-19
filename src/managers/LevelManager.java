@@ -14,6 +14,9 @@ public class LevelManager {
     public void add(Tile tile) {
         esquinas.add(tile);
     }
+    public ArrayList<Tile> getEquinas() {
+        return esquinas;
+    }
     public Tile previousEsquina(Tile tile) {
         Tile tAnterior = null;
         for (Tile t : esquinas) {
@@ -45,26 +48,26 @@ public class LevelManager {
                 anterior = tile;
                 continue;
             }
-            if(anterior.getCentre().x!= tile.getCentre().x){
-                if(anterior.getCentre().x<tile.getCentre().x){
-                    for (float i = anterior.getCentre().x; i < tile.getCentre().x; i++) {
-                        tm.searchTile(i,anterior.getCentre().y).toRoad();
+            if(anterior.getCasilla().x!= tile.getCasilla().x){
+                if(anterior.getCasilla().x<tile.getCasilla().x){
+                    for (float i = anterior.getCasilla().x; i < tile.getCasilla().x; i++) {
+                        tm.searchTile(i,anterior.getCasilla().y).toRoad();
                     }
                 } else {
-                    for (float i = tile.getCentre().x; i < anterior.getCentre().x+1; i++) {
-                        tm.searchTile(i,anterior.getCentre().y).toRoad();
+                    for (float i = tile.getCasilla().x; i < anterior.getCasilla().x+1; i++) {
+                        tm.searchTile(i,anterior.getCasilla().y).toRoad();
                     }
                 }
 
             }
-            if(anterior.getCentre().y!= tile.getCentre().y){
-                if(anterior.getCentre().y<tile.getCentre().y){
-                    for (float i = anterior.getCentre().y; i < tile.getCentre().y; i++) {
-                        tm.searchTile(anterior.getCentre().x,i).toRoad();
+            if(anterior.getCasilla().y!= tile.getCasilla().y){
+                if(anterior.getCasilla().y<tile.getCasilla().y){
+                    for (float i = anterior.getCasilla().y; i < tile.getCasilla().y; i++) {
+                        tm.searchTile(anterior.getCasilla().x,i).toRoad();
                     }
                 } else {
-                    for (float i = tile.getCentre().y; i < anterior.getCentre().y+1; i++) {
-                        tm.searchTile(anterior.getCentre().x,i).toRoad();
+                    for (float i = tile.getCasilla().y; i < anterior.getCasilla().y+1; i++) {
+                        tm.searchTile(anterior.getCasilla().x,i).toRoad();
                     }
                 }
 

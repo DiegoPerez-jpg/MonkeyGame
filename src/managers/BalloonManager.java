@@ -18,10 +18,10 @@ public class BalloonManager {
 
 
 
-//    public void updateBalloons() {
-//        float t = GameManager.getInstance().time;
-//        for (Balloon b : balloons) {
-//            b.avanzar(t);
-//        }
-//    }
+    public void updateBalloons() {
+        float t = (float)GameManager.getInstance().timer.getTime();
+        for (Balloon b : balloons) {
+            b.avanzar(t);
+        }
+    }
 }
