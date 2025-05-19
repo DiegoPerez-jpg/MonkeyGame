@@ -3,6 +3,8 @@
 <levels>
     <level>
         <id></id>
-        
+        <corners> <!--Tablero de 20x15, formato x-y, esquina inf izq 1-1, esquina sup dcha 20-15-->
+            <corner></corner> 
+        </corners>
     </level>
 </levels>
