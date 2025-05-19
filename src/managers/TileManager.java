@@ -21,39 +21,4 @@ public class TileManager {
         for (Tile tile : tiles){if (tile.position.x == (x-1)*32 && tile.position.y == (y-1)*32) return tile;}
         return null;
     }
-    public void crearCamino(){
-        Tile anterior = null;
-        for (Tile tile : GameManager.getInstance().levelManager.esquinas){
-            if (anterior == null) {
-                anterior = tile;
-                continue;
-            }
-            if(anterior.posCentrada.x!= tile.posCentrada.x){
-                if(anterior.posCentrada.x<tile.posCentrada.x){
-                    for (float i = anterior.posCentrada.x; i < tile.posCentrada.x; i++) {
-                        searchTile(i,anterior.posCentrada.y).toRoad();
-                    }
-                } else {
-                    for (float i = tile.posCentrada.x; i < anterior.posCentrada.x+1; i++) {
-                        searchTile(i,anterior.posCentrada.y).toRoad();
-                    }
-                }
-
-            }
-            if(anterior.posCentrada.y!= tile.posCentrada.y){
-                if(anterior.posCentrada.y<tile.posCentrada.y){
-                    for (float i = anterior.posCentrada.y; i < tile.posCentrada.y; i++) {
-                        searchTile(anterior.posCentrada.x,i).toRoad();
-                    }
-                } else {
-                    for (float i = tile.posCentrada.y; i < anterior.posCentrada.y+1; i++) {
-                        searchTile(anterior.posCentrada.x,i).toRoad();
-                    }
-                }
-
-            }
-
-            anterior = tile;
-        }
-    }
 }
