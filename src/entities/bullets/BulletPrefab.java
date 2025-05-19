@@ -4,7 +4,7 @@ import graphics.Color;
 import graphics.Texture;
 
 public enum BulletPrefab {
-    BULLET(1, 1, 1, (new Texture("")));
+    BULLET(1, 1, 1, (new Texture("src/assets/Balloon.png")));
 
     public final int size, damage, velocity;
     public final Texture skin;

@@ -6,13 +6,13 @@ import entities.bullets.Bullet;
 import entities.bullets.BulletPrefab;
 import graphics.Color;
 import graphics.Texture;
+import graphics.terrain.Tile;
 import managers.GameManager;
 import utilities.math.Point;
 import utilities.math.Vector;
 import utilities.util;
 
 public class Monkey extends Entity {
-    Texture skin;
     String nombre;
     float range;
     float cost;
@@ -21,8 +21,8 @@ public class Monkey extends Entity {
     GameManager gm;
     float lastShotTime;
 
-    public Monkey(int size, BulletPrefab bp, float rate, float cost, float range, String nombre, Color skin, Point position) {
-        super((new Texture("")), position,size);
+    public Monkey(int size, BulletPrefab bp, float rate, float cost, float range, String nombre, String skin, Tile tile) {
+        super((new Texture(skin)), tile.getPosition(),size);
         this.bp = bp;
         this.rate = rate;
         this.cost = cost;

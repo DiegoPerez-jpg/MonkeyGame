@@ -36,7 +36,8 @@ public class Tile { // 32x32 px each
         this.background = Color.GRASS;
         this.isGrass = true;
     }
-
+    public Point getCasilla(){
+        return new Point((this.getPosition().x/GameManager.getInstance().tileSize+1), this.getPosition().y/GameManager.getInstance().tileSize+1);}
     public Point getPosition() {return position;}
-    public Point getCentre() {return new Point(position.x+16, position.y+16);} //Posición relativa al centro del tile
+    public Point getCentre() {return new Point(position.x+GameManager.getInstance().tileSize/2, position.y+GameManager.getInstance().tileSize/2);} //Posición relativa al centro del tile
 }

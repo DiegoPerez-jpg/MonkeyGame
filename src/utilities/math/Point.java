@@ -11,7 +11,13 @@ public class Point{
         this.y = y;
         this.name = name;
     }
-
+    @Override
+    public String toString(){
+        if(name==null){
+            return x+","+y;
+        }
+        return name + " (" + x + ", " + y + ")";
+    }
     public Point(float x, float y) {
         this(x, y,null);
     }
