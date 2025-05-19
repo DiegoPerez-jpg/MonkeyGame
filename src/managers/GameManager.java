@@ -43,7 +43,7 @@ public class GameManager {
         this.monkeyManager = new MonkeyManager();
         this.balloonManager = new BalloonManager();
         this.bulletManager = new BulletManager();
-        this.levelManager = new LevelManager(new ArrayList<>());
+        this.levelManager = new LevelManager();
         levelManager.add(new Tile(Color.ROAD,new Point(1,1)));
         levelManager.add(new Tile(Color.ROAD,new Point(10,1)));
         levelManager.add(new Tile(Color.ROAD,new Point(10,5)));
