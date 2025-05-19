@@ -19,7 +19,8 @@ public class MonkeyManager {
     public void removeMonkey(Monkey monkey) {
         monkeys.remove(monkey);
     }
-    public void updateMonkey(Float t) {
+    public void updateMonkey() {
+        float t = GameManager.getInstance().time;
         for(Monkey m : monkeys) {
             m.disparar(t);
         }

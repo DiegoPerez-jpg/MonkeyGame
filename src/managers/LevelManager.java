@@ -10,6 +10,9 @@ public class LevelManager {
     public LevelManager(ArrayList<Tile> esquinas) {
         this.esquinas = esquinas;
     }
+    public void add(Tile tile) {
+        esquinas.add(tile);
+    }
     public Tile previousEsquina(Tile tile) {
         Tile tAnterior = null;
         for (Tile t : esquinas) {

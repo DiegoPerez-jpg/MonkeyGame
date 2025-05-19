@@ -1,6 +1,12 @@
 package managers;
 
+import graphics.Color;
 import graphics.Renderer;
+import graphics.terrain.Tile;
+import utilities.math.Point;
+
+import java.util.ArrayList;
+
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 
 public class GameManager {
@@ -34,8 +40,17 @@ public class GameManager {
         this.monkeyManager = new MonkeyManager();
         this.balloonManager = new BalloonManager();
         this.bulletManager = new BulletManager();
-        this.levelManager = new LevelManager(null);
-        tileManager.searchTile(2, 2).toRoad();
+        this.levelManager = new LevelManager(new ArrayList<>());
+        levelManager.add(new Tile(Color.ROAD,new Point(1,1)));
+        levelManager.add(new Tile(Color.ROAD,new Point(10,1)));
+        levelManager.add(new Tile(Color.ROAD,new Point(10,5)));
+        levelManager.add(new Tile(Color.ROAD,new Point(15,5)));
+        levelManager.add(new Tile(Color.ROAD,new Point(15,10)));
+        levelManager.add(new Tile(Color.ROAD,new Point(10,10)));
+        levelManager.add(new Tile(Color.ROAD,new Point(10,15)));
+        levelManager.add(new Tile(Color.ROAD,new Point(12,15)));
+        tileManager.crearCamino();
+
         //glfwWindowShouldClose devuelve true si se cierra la ventana
         while (!glfwWindowShouldClose(renderer.getWindow())) { //Game loop
             renderer.update();
