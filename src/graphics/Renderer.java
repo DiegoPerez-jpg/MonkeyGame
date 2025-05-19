@@ -1,5 +1,6 @@
 package graphics;
 
+import entities.balloons.Balloon;
 import graphics.terrain.Tile;
 import managers.GameManager;
 import managers.TileManager;
@@ -48,6 +49,10 @@ public class Renderer {
 
         GL11.glOrtho(0, gm.width, 0, gm.height, -1, 1); //Posiciona (0, 0) en la esquina inferior izquierda
         //glOrtho(-1*gm.width/2, gm.width/2, -1*gm.height, gm.height, -1, 1); //Posiciona (0, 0) en el centro de la ventana
+
+        glEnable(GL_BLEND); // Habilito el canal alpha para que pueda haber transparencias
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glDisable(GL_DEPTH_TEST);
     }
 
     public void update() {
@@ -58,9 +63,9 @@ public class Renderer {
     }
 
     private void draw(){
-        //for (Tile t : tm.tiles){Draw.drawPoly(t.corners, t.background);}
-
-
+        for (Tile t : tm.tiles){Draw.drawPoly(t.corners, t.background);}
+        Balloon b = new Balloon(new Point(0, 0), 4, 4.0, "");
+        b.skin.render(b.position);
     }
 
     public void clean() { //Libera los recursos

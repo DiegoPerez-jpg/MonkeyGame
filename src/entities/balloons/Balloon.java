@@ -2,6 +2,7 @@ package entities.balloons;
 
 import entities.Entity;
 import graphics.Color;
+import graphics.Texture;
 import graphics.terrain.Tile;
 import managers.BalloonManager;
 import managers.GameManager;
@@ -16,10 +17,10 @@ public class Balloon extends Entity {
     Tile target;
     float velocity;
     float time;
-    public Balloon(Color skin, Point position, int size, Double vida, Balloon previousBallon, String tipo) {
-        super(skin, position, size);
+    public Balloon(Point position, int size, Double vida, String tipo) {
+        super(new Texture("src/assets/Balloon.png"), position, size);
         this.vida = vida;
-        this.previousBallon = previousBallon;
+        //this.previousBallon = previousBallon;
         this.tipo = tipo;
         this.time = GameManager.getInstance().time;
     }

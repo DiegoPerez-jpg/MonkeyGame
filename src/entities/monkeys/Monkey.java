@@ -5,13 +5,14 @@ import entities.balloons.Balloon;
 import entities.bullets.Bullet;
 import entities.bullets.BulletPrefab;
 import graphics.Color;
+import graphics.Texture;
 import managers.GameManager;
 import utilities.math.Point;
 import utilities.math.Vector;
 import utilities.util;
 
 public class Monkey extends Entity {
-    Color skin;
+    Texture skin;
     String nombre;
     float range;
     float cost;
@@ -21,7 +22,7 @@ public class Monkey extends Entity {
     float lastShotTime;
 
     public Monkey(int size, BulletPrefab bp, float rate, float cost, float range, String nombre, Color skin, Point position) {
-        super(skin,position,size);
+        super((new Texture("")), position,size);
         this.bp = bp;
         this.rate = rate;
         this.cost = cost;

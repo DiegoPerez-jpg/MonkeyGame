@@ -4,6 +4,7 @@ import graphics.Color;
 import graphics.Renderer;
 import graphics.terrain.Tile;
 import utilities.math.Point;
+import entities.balloons.Balloon;
 
 import java.util.ArrayList;
 
@@ -50,7 +51,6 @@ public class GameManager {
         levelManager.add(new Tile(Color.ROAD,new Point(10,15)));
         levelManager.add(new Tile(Color.ROAD,new Point(12,15)));
         tileManager.crearCamino();
-
         //glfwWindowShouldClose devuelve true si se cierra la ventana
         while (!glfwWindowShouldClose(renderer.getWindow())) { //Game loop
             renderer.update();

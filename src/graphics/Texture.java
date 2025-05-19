@@ -2,6 +2,7 @@ package graphics;
 
 import org.lwjgl.stb.STBImage;
 import org.lwjgl.system.MemoryStack;
+import utilities.math.Point;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
@@ -13,6 +14,8 @@ import static org.lwjgl.opengl.GL30.glGenerateMipmap;
 public class Texture {
     int texId, width, height;
     public Texture(String path){
+//        glEnable(GL_BLEND);
+//        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         MemoryStack stack = MemoryStack.stackPush();
         IntBuffer widthBuf = stack.mallocInt(1);
         IntBuffer heightBuff = stack.mallocInt(1);
@@ -41,15 +44,14 @@ public class Texture {
         this.texId = textureID;
     }
 
-    public void render(float x, float y){
+    public void render(Point p) {
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, texId);
-
         glBegin(GL_QUADS);
-        glTexCoord2f(0.0f, 0.0f); glVertex2f(x, y);         // Abajo izquierda
-        glTexCoord2f(1.0f, 0.0f); glVertex2f(x + width, y);     // Abajo derecha
-        glTexCoord2f(1.0f, 1.0f); glVertex2f(x + width, y + height); // Arriba derecha
-        glTexCoord2f(0.0f, 1.0f); glVertex2f(x, y + height);     // Arriba izquierda
+        glTexCoord2f(0.0f, 0.0f); glVertex2f(p.x, p.y);         // Abajo izquierda
+        glTexCoord2f(1.0f, 0.0f); glVertex2f(p.x + width, p.y);     // Abajo derecha
+        glTexCoord2f(1.0f, 1.0f); glVertex2f(p.x + width, p.y + height); // Arriba derecha
+        glTexCoord2f(0.0f, 1.0f); glVertex2f(p.x, p.y + height);     // Arriba izquierda
         glEnd();
 
         glDisable(GL_TEXTURE_2D);

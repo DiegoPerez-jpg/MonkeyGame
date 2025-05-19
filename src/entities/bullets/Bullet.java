@@ -4,6 +4,7 @@ import entities.Entity;
 import entities.balloons.Balloon;
 import entities.monkeys.Monkey;
 import graphics.Color;
+import graphics.Texture;
 import managers.GameManager;
 import utilities.math.Point;
 
@@ -20,19 +21,19 @@ public class Bullet extends Entity {
     public Monkey monkey;
     public float time;
 
-    public Bullet(Point position, float velocity, Color skin, int size, float damage, float bulletType, Balloon target) {
-        super(skin,position,size);
+    public Bullet(Point position, float velocity, int size, float damage, float bulletType, Balloon target) {
+        super(new Texture(""), position, size);
         this.velocity = velocity;
         this.damage = damage;
         this.bulletType = bulletType;
         this.target = target;
         this.time = GameManager.getInstance().time;
     }
-    public Bullet(BulletPrefab bt, Point position, Balloon target) {
-        super(bt.skin,position,bt.size);
-        this.velocity = bt.velocity;
-        this.damage = bt.damage;
-        //this.bulletType = bt.bulletType;
+    public Bullet(BulletPrefab bp, Point position, Balloon target) {
+        super(bp.skin, position, bp.size);
+        this.velocity = bp.velocity;
+        this.damage = bp.damage;
+        //this.bulletType = bp.bulletType;
         this.target = target;
         this.time = GameManager.getInstance().time;
     }
