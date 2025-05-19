@@ -10,15 +10,17 @@ public class TileManager {
     public ArrayList<Tile> tiles;
     public TileManager() {
         this.tiles = new ArrayList<>();
-        for (int i = 0; i<GameManager.getInstance().width/32; i++){
-            for (int j = 0; j<GameManager.getInstance().height/32; j++){
-                tiles.add(new Tile(Color.GRASS, new Point((32*i)+16, (32*j)+16)));
+        int ts = GameManager.getInstance().tileSize;
+        for (int i = 1; i<=GameManager.getInstance().width/ts; i++){
+            for (int j = 1; j<=GameManager.getInstance().height/ts; j++){
+                tiles.add(new Tile(Color.GRASS, new Point(i, j)));
             }
         }
     }
 
     public Tile searchTile(float x, float y){
-        for (Tile tile : tiles){if (tile.position.x == (x-1)*32 && tile.position.y == (y-1)*32) return tile;}
+        int ts = GameManager.getInstance().tileSize;
+        for (Tile tile : tiles){if (tile.position.x == (x-1)*ts && tile.position.y == (y-1)*ts) return tile;}
         return null;
     }
 }

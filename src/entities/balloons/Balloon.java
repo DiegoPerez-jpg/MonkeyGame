@@ -29,7 +29,7 @@ public class Balloon extends Entity {
     }
     public void avanzar(float t){
         float dT = time-t;
-        Vector vectorALaesquina = util.createVector(this.position, target.posCentrada);
+        Vector vectorALaesquina = util.createVector(this.position, target.getCentre());
 
         if(vectorALaesquina.getMod()<1){
 

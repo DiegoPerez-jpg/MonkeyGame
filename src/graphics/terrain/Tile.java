@@ -1,6 +1,7 @@
 package graphics.terrain;
 
 import graphics.Color;
+import managers.GameManager;
 import utilities.math.Point;
 import entities.monkeys.Monkey;
 
@@ -8,21 +9,20 @@ import java.util.ArrayList;
 
 public class Tile { // 32x32 px each
     public Color background;
-    public Point posCentrada; //Posición relativa al centro del tile
     public Point position; //Posición relativa a la esquina inferior izq
     public ArrayList<Point> corners;
     boolean isGrass;
     Monkey monkey;
-    public Tile(Color background, Point posCentrada) {
+    public Tile(Color background, Point casilla) {
+        int ts = GameManager.getInstance().tileSize;
         this.background = background;
-        this.position = new Point(posCentrada.x-16, posCentrada.y-16);
-        this.posCentrada = posCentrada;
+        this.position = new Point((casilla.x-1)*ts, (casilla.y-1)*ts); //Posición relativa a abajo a la izq
         this.corners = new ArrayList<>();
         //Importante puntos en sentido antihorario empezando por arriba a la izq
-        corners.add(new Point(position.x, position.y+32));
+        corners.add(new Point(position.x, position.y+ts));
         corners.add(position);
-        corners.add(new Point(position.x+32, position.y));
-        corners.add(new Point(position.x+32, position.y+32));
+        corners.add(new Point(position.x+ts, position.y));
+        corners.add(new Point(position.x+ts, position.y+ts));
         isGrass = (background == Color.GRASS);
         monkey = null;
     }
@@ -36,4 +36,7 @@ public class Tile { // 32x32 px each
         this.background = Color.GRASS;
         this.isGrass = true;
     }
+
+    public Point getPosition() {return position;}
+    public Point getCentre() {return new Point(position.x+16, position.y+16);} //Posición relativa al centro del tile
 }

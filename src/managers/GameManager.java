@@ -22,10 +22,12 @@ public class GameManager {
     public Renderer renderer;
     public float time;
     public double vida;
+    public int tileSize;
     private GameManager(){
         this.width = 640;
         this.height = 480;
         this.time = 0;
+        this.tileSize = 32;
     }
 
     public static GameManager getInstance() {
@@ -50,7 +52,7 @@ public class GameManager {
         levelManager.add(new Tile(Color.ROAD,new Point(10,10)));
         levelManager.add(new Tile(Color.ROAD,new Point(10,15)));
         levelManager.add(new Tile(Color.ROAD,new Point(12,15)));
-        levelManager.crearCamino();
+        //levelManager.crearCamino();
         //glfwWindowShouldClose devuelve true si se cierra la ventana
         while (!glfwWindowShouldClose(renderer.getWindow())) { //Game loop
             renderer.update();
