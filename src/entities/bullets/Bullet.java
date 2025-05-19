@@ -40,6 +40,9 @@ public class Bullet extends Entity {
         this.time = (float)GameManager.getInstance().timer.getTime();
     }
     public boolean avanzar(float t) {
+        if(GameManager.getInstance().balloonManager.searchBalloon(target) ==-1){
+            return true;
+        }
         //diferencia tiempo
         float dT = t - time;
         this.time = t;
