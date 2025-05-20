@@ -17,9 +17,10 @@ public class Monkey extends Entity {
     float range;
     float cost;
     float rate;
-    BulletPrefab bp;
+    public BulletPrefab bp;
     float lastShotTime;
     int[] mejoras;
+    boolean canDetectCamos = false;
     public Monkey(int size, BulletPrefab bp, float rate, float cost, float range, String nombre, String skin, Tile tile) {
         super((new Texture(skin)), tile.getPosition(),size);
         mejoras = new int[]{0,0,0};
@@ -29,8 +30,21 @@ public class Monkey extends Entity {
         this.range = range*GameManager.getInstance().tileSize;
         this.nombre = nombre;
     }
+    public Monkey(int size, BulletPrefab bp, float rate, float cost, float range, String nombre, String skin, Tile tile, boolean canDetectCamos) {
+        super((new Texture(skin)), tile.getPosition(),size);
+        mejoras = new int[]{0,0,0};
+        this.bp = bp;
+        this.rate = rate;
+        this.cost = cost;
+        this.range = range*GameManager.getInstance().tileSize;
+        this.nombre = nombre;
+        this.canDetectCamos = canDetectCamos;
+    }
     protected Balloon getCloserBalloon(){
         for(Balloon b : GameManager.getInstance().balloonManager.getBalloons()) {
+            if (b.isACamoBalloon && !canDetectCamos) {
+                continue;
+            }
             Vector distance = util.createVector(b.position, this.position);
             if (distance.getMod() < this.range) {
                 return b;

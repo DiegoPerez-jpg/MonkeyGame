@@ -22,10 +22,11 @@ public class BalloonManager {
         this.lastBalloonTimeSpawned = new ArrayList<>();
         amountBalloon.add(new ArrayList<>());
         amountBalloon.add(new ArrayList<>());
-        amountBalloon.get(0).add(0);
-        amountBalloon.get(0).add(1);
+        amountBalloon.get(0).add(100);
+        amountBalloon.get(0).add(100);
         this.waveDurantion = new ArrayList<>();
-        waveDurantion.add(1f);
+        waveDurantion.add(50f);
+        waveDurantion.add(100f);
     }
     public void addBalloon(Balloon balloon) {balloons.add(balloon);}
 
@@ -74,7 +75,6 @@ public class BalloonManager {
             float cantidad_de_tipo = amountBalloon.get(waveCount).get(i);
             float intervalo = waveDurantion.get(waveCount)/cantidad_de_tipo;
 
-            System.out.println("xdddd");
             if(t - lastBalloonTimeSpawned.get(i) >= intervalo ){
                 lastBalloonTimeSpawned.set(i,t);
                 balloons.add(new Balloon(1,(double) i+1,"Normal",100));

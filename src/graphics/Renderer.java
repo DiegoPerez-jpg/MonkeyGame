@@ -74,10 +74,10 @@ public class Renderer {
         for (Tile t : tm.tiles){Draw.drawPoly(t.corners, t.background);}
         for (Monkey t : mm.getMonkeys()){t.skin.render(t.position);}
         for (Balloon b : bm.getBalloons()){b.skin.render(b.position);}
+        for(Bullet b : bulletManager.getBullets()){b.skin.render(b.position);}
         //Render interfaces
         Draw.drawPoly(gm.asideUI.corners, gm.asideUI.background);
         Draw.drawPoly(gm.bottomUI.corners, gm.bottomUI.background);
-        for(Bullet b : bulletManager.getBullets()){b.skin.render(b.position);}
     }
 
     public void clean() { //Libera los recursos
