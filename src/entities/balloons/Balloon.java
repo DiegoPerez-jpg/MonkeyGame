@@ -14,6 +14,7 @@ public class Balloon extends Entity {
     public Tile target;
     float velocity;
     float time;
+    public boolean isACamoBalloon = false;
     public Balloon(int size, Double vida, String tipo, float velocity) {
         super(new Texture("src/assets/Balloon.png"), GameManager.getInstance().getCurrentLevel().getEquinas().get(0).getPosition(), size);
         this.vida = vida;
@@ -22,6 +23,17 @@ public class Balloon extends Entity {
         this.tipo = tipo;
         this.time = (float)GameManager.getInstance().timer.getTime();
         this.target = GameManager.getInstance().getCurrentLevel().getEquinas().get(0);
+        actualizar_skin();
+    }
+    public Balloon(int size, Double vida, String tipo, float velocity,Boolean isACamoBalloon) {
+        super(new Texture("src/assets/Balloon.png"), GameManager.getInstance().getCurrentLevel().getEquinas().get(0).getPosition(), size);
+        this.vida = vida;
+        this.velocity = velocity;
+        //this.previousBallon = previousBallon;
+        this.tipo = tipo;
+        this.time = (float)GameManager.getInstance().timer.getTime();
+        this.target = GameManager.getInstance().getCurrentLevel().getEquinas().get(0);
+        this.isACamoBalloon = isACamoBalloon;
         actualizar_skin();
     }
     public void avanzar(float t){

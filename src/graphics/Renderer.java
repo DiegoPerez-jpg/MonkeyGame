@@ -67,6 +67,7 @@ public class Renderer {
         for (Monkey t : mm.getMonkeys()){t.skin.render(t.position);}
         for (Balloon b : bm.getBalloons()){b.skin.render(b.position);}
         for(Bullet b : bulletManager.getBullets()){b.skin.render(b.position);}
+
         //Render interfaces y subinterfaces
         Draw.drawPoly(gm.asideUI.corners, gm.asideUI.background);
         for (UI div : gm.asideUI.layouts){Draw.drawPoly(div.corners, div.background);}

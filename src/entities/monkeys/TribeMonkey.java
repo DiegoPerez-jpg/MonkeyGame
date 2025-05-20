@@ -16,7 +16,7 @@ public class TribeMonkey extends Monkey implements UpgradableMonkey{
     double tasaAportado =1;
     MonkeyManager mm;
     public TribeMonkey(Tile tile) {
-        super(1, BulletPrefab.BULLETTRIBE,1,200,5,"Mono de tribu","src/assets/monkeyDarderolvl1.png",tile);
+        super(1, BulletPrefab.BULLETTRIBE,1,200,7,"Mono de tribu","src/assets/monkeyDarderolvl1.png",tile);
         mm = GameManager.getInstance().monkeyManager;
     }
     public void upgradeFirst(){

@@ -56,7 +56,6 @@ public class GameManager {
         this.bulletManager = new BulletManager();
         this.renderer = new Renderer(width, height);
         this.inputManager = new InputManager();
-        balloonManager.addBalloon(new Balloon( 4, 4.0, "",100));
         monkeyManager.addMonkey(new TribeMonkey(tileManager.searchTile(4,5)));
         getCurrentLevel().crearCamino();
         //sentido antihorario empezando por arriba la izq
