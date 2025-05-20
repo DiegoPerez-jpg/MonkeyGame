@@ -4,8 +4,8 @@ import graphics.Color;
 import graphics.Texture;
 
 public enum BulletPrefab {
-    BULLETTRIBE(1, 400, (new Texture("src/assets/dardo.png")));
-
+    BULLETTRIBE(1, 400, (new Texture("src/assets/dardo.png"))),
+    EXPLOSION(10,0,(new Texture("src/assets/dardo.png")));
     public final int size, velocity;
     public final Texture skin;
 

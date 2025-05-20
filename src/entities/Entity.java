@@ -18,4 +18,8 @@ public class Entity {
     public void setSkin(String skin) {
         this.skin = new Texture(skin);
     }
+
+    public void setPosition(Point position) {
+        this.position = position;
+    }
 }
