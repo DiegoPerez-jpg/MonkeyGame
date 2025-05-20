@@ -1,6 +1,8 @@
 package graphics.surface;
 
 import graphics.Color;
+import managers.GameManager;
+import utilities.Util;
 import utilities.math.Point;
 
 import java.util.ArrayList;
@@ -8,19 +10,79 @@ import java.util.ArrayList;
 public class UI {
     public Color background, borderColor;
     public ArrayList<Point> corners;
-    public int borderSize;
-
-    public UI(Color color, ArrayList<Point> corners){ //Puntos en sentido antihorario empezando arriba a la izq
+    public int borderSize, padding, margin;
+    ArrayList<UI> layouts;
+    private boolean verticalAlign, alignCenter;
+    private float space; //variable entre 0-1 que representa el espacio ocupado la UI
+    public UI(Color color, ArrayList<Point> corners, boolean vertical){ //Puntos en sentido antihorario empezando arriba a la izq
         this.background = color;
         this.corners = corners;
+        this.layouts = new ArrayList<>();
+        this.borderSize = 0;
+        this.padding = 0;
+        this.margin = 0;
+        this.space = 0;
+        this.verticalAlign = vertical;
+
     }
-    public UI(Color color, ArrayList<Point> corners, int borderSize, Color borderColor){
-        this(color, corners);
+    public UI(Color color, ArrayList<Point> corners, boolean vertical, int borderSize, Color borderColor){
+        this(color, corners, vertical);
         this.borderSize = borderSize;
         this.borderColor = borderColor;
     }
+    public UI(Color color, ArrayList<Point> corners, boolean vertical, int margin, int padding){
+        this(color, corners, vertical);
+        this.margin = margin;
+        this.padding = padding;
+    }
+    public UI(Color color, ArrayList<Point> corners, boolean vertical, int margin, int padding, int borderSize, Color borderColor){
+        this(color, corners, vertical, borderSize, borderColor);
+        this.margin = margin;
+        this.padding = padding;
+    }
 
     public Point toGlobal(Point point){ //Pasa las coordenadas locales de la UI (respecto esquina inf izq) a globales
-        return new Point(point.x + corners.get(1).x, point.y+corners.get(1).y);
+        return new Point(point.x + corners.get(1).x + padding, point.y+corners.get(1).y + padding);
+    }
+
+    public Point toGlobal(float x, float y){return toGlobal(new Point(x, y));}
+
+    public void setVerticalAlign(boolean vertical){
+        if (space == 0) this.verticalAlign = vertical;
+        else System.out.println("Para modificar la horientación la UI debe estar vacia");
+    }
+
+    public void setJustifyContent(boolean value){
+        if (space == 0) this.alignCenter = value;
+        else System.out.println("Para modificar alignCenter la UI debe estar vacia");
+    }
+
+    public void addLayout(float appendSpace, Color color, int borderSize, Color borderColor, int childPadding){
+        if (space+appendSpace >= 1){
+            System.out.println("No cabe en el layout");
+            return;
+        }
+        int fatherWidth = Math.round(Util.createVector(corners.get(0), corners.get(4)).getMod());
+        int fatherHeight = Math.round(Util.createVector(corners.get(1), corners.get(2)).getMod());
+        if (verticalAlign){
+            int start_y = Math.round(fatherHeight*(1-space));
+            int end_y = Math.round(fatherHeight*(1-appendSpace+space));
+            layouts.add(new UI(color, new ArrayList<>() {{
+                add(toGlobal(margin, start_y+margin));
+                add(toGlobal(margin, end_y-margin));
+                add(toGlobal(fatherWidth-margin, end_y-margin));
+                add(toGlobal(fatherWidth-margin, start_y+margin));
+            }}, false, padding, childPadding, borderSize, borderColor));
+        }
+        else{
+            int start_x = Math.round(fatherWidth*space);
+            int end_x = Math.round(fatherWidth*(appendSpace+space));
+            layouts.add(new UI(color, new ArrayList<>() {{
+                add(toGlobal(start_x+margin, fatherHeight-margin));
+                add(toGlobal(start_x+margin, margin));
+                add(toGlobal(end_x-margin, margin));
+                add(toGlobal(end_x-margin, fatherHeight-margin));
+            }}, false, padding, childPadding, borderSize, borderColor));
+        }
     }
 }

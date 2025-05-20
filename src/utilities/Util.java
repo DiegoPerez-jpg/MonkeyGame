@@ -3,7 +3,7 @@ package utilities;
 import utilities.math.Point;
 import utilities.math.Vector;
 
-public class util {
+public class Util {
     /**
      * @param pf punto final del vector creado
      * @param p0 punto origen del vector creado

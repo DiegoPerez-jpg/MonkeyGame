@@ -1,13 +1,11 @@
 package entities.balloons;
 
 import entities.Entity;
-import graphics.Color;
 import graphics.Texture;
 import graphics.terrain.Tile;
-import managers.BalloonManager;
 import managers.GameManager;
 import utilities.math.Point;
-import utilities.util;
+import utilities.Util;
 import utilities.math.Vector;
 
 public class Balloon extends Entity {
@@ -28,7 +26,7 @@ public class Balloon extends Entity {
     }
     public void avanzar(float t){
         float dT = t-time;
-        Vector vectorALaesquina = util.createVector(target.getPosition(),this.position);
+        Vector vectorALaesquina = Util.createVector(target.getPosition(),this.position);
         if(vectorALaesquina.getMod()<1){
 
             target = GameManager.getInstance().balloonManager.nextEsquina(target);

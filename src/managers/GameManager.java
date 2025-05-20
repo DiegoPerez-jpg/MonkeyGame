@@ -5,8 +5,7 @@ import entities.monkeys.Monkey;
 import entities.monkeys.TribeMonkey;
 import graphics.Color;
 import graphics.Renderer;
-import graphics.surface.AsideUI;
-import graphics.surface.BottomUI;
+import graphics.surface.UI;
 import graphics.terrain.Tile;
 import levels.Level;
 import utilities.Timer;
@@ -33,8 +32,7 @@ public class GameManager {
     public double vida;
     public int tileSize;
     public Timer timer;
-    public AsideUI asideUI;
-    public BottomUI bottomUI;
+    public UI asideUI, bottomUI;
     private GameManager(){
         this.gameWidth = 640;
         this.gameHeight = 480;
@@ -64,14 +62,14 @@ public class GameManager {
         monkeyManager.addMonkey(new TribeMonkey(tileManager.searchTile(4,5)));
         getCurrentLevel().crearCamino();
         //sentido antihorario empezando por arriba la izq
-        this.asideUI = new AsideUI(Color.BLUEUI, new ArrayList<>() {{
+        this.asideUI = new UI(Color.BLUEUI, new ArrayList<>() {{
             add(new Point(gameWidth, height)); add(new Point(gameWidth, extension_y));
             add(new Point(width, extension_y)); add(new Point(width, height));
-        }});
-        this.bottomUI = new BottomUI(Color.BLUEUI2, new ArrayList<>() {{
+        }}, true);
+        this.bottomUI = new UI(Color.BLUEUI2, new ArrayList<>() {{
             add(new Point(0, extension_y)); add(new Point(0, 0));
             add(new Point(width, 0)); add(new Point(width, extension_y));
-        }});
+        }}, false);
 
     }
 

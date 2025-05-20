@@ -3,14 +3,13 @@ package entities.bullets;
 import entities.Entity;
 import entities.balloons.Balloon;
 import entities.monkeys.Monkey;
-import graphics.Color;
 import graphics.Texture;
 import managers.GameManager;
 import utilities.math.Point;
 
 import utilities.math.Vector;
 
-import static utilities.util.createVector;
+import static utilities.Util.createVector;
 
 
 public class Bullet extends Entity {

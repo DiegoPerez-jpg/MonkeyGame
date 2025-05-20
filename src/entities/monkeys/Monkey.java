@@ -4,13 +4,11 @@ import entities.Entity;
 import entities.balloons.Balloon;
 import entities.bullets.Bullet;
 import entities.bullets.BulletPrefab;
-import graphics.Color;
 import graphics.Texture;
 import graphics.terrain.Tile;
 import managers.GameManager;
-import utilities.math.Point;
 import utilities.math.Vector;
-import utilities.util;
+import utilities.Util;
 
 public class Monkey extends Entity {
     String nombre;
@@ -31,7 +29,7 @@ public class Monkey extends Entity {
     }
     protected Balloon getCloserBalloon(){
         for(Balloon b : GameManager.getInstance().balloonManager.getBalloons()) {
-            Vector distance = util.createVector(b.position, this.position);
+            Vector distance = Util.createVector(b.position, this.position);
             if (distance.getMod() < this.range) {
                 return b;
             }

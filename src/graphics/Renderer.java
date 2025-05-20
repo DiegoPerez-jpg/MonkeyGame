@@ -3,18 +3,11 @@ package graphics;
 import entities.balloons.Balloon;
 import entities.bullets.Bullet;
 import entities.monkeys.Monkey;
-import graphics.surface.AsideUI;
 import graphics.terrain.Tile;
 import managers.*;
 import utilities.math.Point;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
-import graphics.Draw;
-import java.util.ArrayList;
-import org.lwjgl.stb.STBImage;
-import org.lwjgl.system.MemoryStack;
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
 
 
 import static org.lwjgl.glfw.Callbacks.*;
