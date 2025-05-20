@@ -1,7 +1,5 @@
-package graphics.surface;
+package graphics;
 
-import graphics.Color;
-import managers.GameManager;
 import utilities.Util;
 import utilities.math.Point;
 
@@ -11,7 +9,7 @@ public class UI {
     public Color background, borderColor;
     public ArrayList<Point> corners;
     public int borderSize, padding, margin;
-    ArrayList<UI> layouts;
+    public ArrayList<UI> layouts;
     private boolean verticalAlign, alignCenter;
     private float space; //variable entre 0-1 que representa el espacio ocupado la UI
     public UI(Color color, ArrayList<Point> corners, boolean vertical){ //Puntos en sentido antihorario empezando arriba a la izq
@@ -42,7 +40,7 @@ public class UI {
     }
 
     public Point toGlobal(Point point){ //Pasa las coordenadas locales de la UI (respecto esquina inf izq) a globales
-        return new Point(point.x + corners.get(1).x + padding, point.y+corners.get(1).y + padding);
+        return new Point(point.x + corners.get(1).x, point.y + corners.get(1).y);
     }
 
     public Point toGlobal(float x, float y){return toGlobal(new Point(x, y));}
@@ -58,31 +56,35 @@ public class UI {
     }
 
     public void addLayout(float appendSpace, Color color, int borderSize, Color borderColor, int childPadding){
-        if (space+appendSpace >= 1){
+        if (space+appendSpace > 1){
             System.out.println("No cabe en el layout");
             return;
         }
-        int fatherWidth = Math.round(Util.createVector(corners.get(0), corners.get(4)).getMod());
-        int fatherHeight = Math.round(Util.createVector(corners.get(1), corners.get(2)).getMod());
+        int fatherWidth = Math.round(Util.createVector(corners.get(0), corners.get(3)).getMod());
+        int fatherHeight = Math.round(Util.createVector(corners.get(0), corners.get(1)).getMod());
         if (verticalAlign){
-            int start_y = Math.round(fatherHeight*(1-space));
-            int end_y = Math.round(fatherHeight*(1-appendSpace+space));
+            int start_y = Math.round(fatherHeight*(1-space)) - margin;
+            int end_y = Math.round(fatherHeight*(1-appendSpace-space)) + margin;
             layouts.add(new UI(color, new ArrayList<>() {{
-                add(toGlobal(margin, start_y+margin));
-                add(toGlobal(margin, end_y-margin));
-                add(toGlobal(fatherWidth-margin, end_y-margin));
-                add(toGlobal(fatherWidth-margin, start_y+margin));
-            }}, false, padding, childPadding, borderSize, borderColor));
+                add(toGlobal(margin, end_y));
+                add(toGlobal(margin, start_y));
+                add(toGlobal(fatherWidth-margin, start_y));
+                add(toGlobal(fatherWidth-margin, end_y));
+            }}, true, padding, childPadding, borderSize, borderColor));
         }
         else{
-            int start_x = Math.round(fatherWidth*space);
-            int end_x = Math.round(fatherWidth*(appendSpace+space));
+            int start_x = Math.round(fatherWidth*space) + margin;
+            int end_x = Math.round(fatherWidth*(appendSpace+space)) - margin;
             layouts.add(new UI(color, new ArrayList<>() {{
-                add(toGlobal(start_x+margin, fatherHeight-margin));
-                add(toGlobal(start_x+margin, margin));
-                add(toGlobal(end_x-margin, margin));
-                add(toGlobal(end_x-margin, fatherHeight-margin));
+                add(toGlobal(start_x, fatherHeight-margin));
+                add(toGlobal(start_x, margin));
+                add(toGlobal(end_x, margin));
+                add(toGlobal(end_x, fatherHeight-margin));
             }}, false, padding, childPadding, borderSize, borderColor));
         }
+        this.space += appendSpace;
+    }
+    public void addLayout(float appendSpace, Color color){
+        addLayout(appendSpace, color, 0, Color.BLACK, 0);
     }
 }

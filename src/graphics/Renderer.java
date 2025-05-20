@@ -5,16 +5,15 @@ import entities.bullets.Bullet;
 import entities.monkeys.Monkey;
 import graphics.terrain.Tile;
 import managers.*;
-import utilities.math.Point;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
+import utilities.math.Point;
 
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.opengl.GL30.glGenerateMipmap;
 
 
 public class Renderer {
@@ -67,10 +66,12 @@ public class Renderer {
         for (Tile t : tm.tiles){Draw.drawPoly(t.corners, t.background);}
         for (Monkey t : mm.getMonkeys()){t.skin.render(t.position);}
         for (Balloon b : bm.getBalloons()){b.skin.render(b.position);}
-        //Render interfaces
-        Draw.drawPoly(gm.asideUI.corners, gm.asideUI.background);
-        Draw.drawPoly(gm.bottomUI.corners, gm.bottomUI.background);
         for(Bullet b : bulletManager.getBullets()){b.skin.render(b.position);}
+        //Render interfaces y subinterfaces
+        Draw.drawPoly(gm.asideUI.corners, gm.asideUI.background);
+        for (UI div : gm.asideUI.layouts){Draw.drawPoly(div.corners, div.background);}
+        Draw.drawPoly(gm.bottomUI.corners, gm.bottomUI.background);
+        for (UI div : gm.bottomUI.layouts){Draw.drawPoly(div.corners, div.background);}
     }
 
     public void clean() { //Libera los recursos

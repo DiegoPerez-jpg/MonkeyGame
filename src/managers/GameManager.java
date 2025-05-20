@@ -1,14 +1,12 @@
 package managers;
 
-import entities.bullets.BulletPrefab;
-import entities.monkeys.Monkey;
 import entities.monkeys.TribeMonkey;
 import graphics.Color;
 import graphics.Renderer;
-import graphics.surface.UI;
-import graphics.terrain.Tile;
+import graphics.UI;
 import levels.Level;
 import utilities.Timer;
+import utilities.Util;
 import utilities.math.Point;
 import entities.balloons.Balloon;
 
@@ -65,12 +63,16 @@ public class GameManager {
         this.asideUI = new UI(Color.BLUEUI, new ArrayList<>() {{
             add(new Point(gameWidth, height)); add(new Point(gameWidth, extension_y));
             add(new Point(width, extension_y)); add(new Point(width, height));
-        }}, true);
+        }}, true, 20, 0);
         this.bottomUI = new UI(Color.BLUEUI2, new ArrayList<>() {{
             add(new Point(0, extension_y)); add(new Point(0, 0));
             add(new Point(width, 0)); add(new Point(width, extension_y));
-        }}, false);
+        }}, false, 20, 0);
 
+        asideUI.addLayout(0.2f, Color.YELLOW);
+        asideUI.addLayout(0.4f, Color.GREEN);
+        bottomUI.addLayout(0.2f, Color.YELLOW);
+        bottomUI.addLayout(0.4f, Color.GREEN);
     }
 
     public void play(){
