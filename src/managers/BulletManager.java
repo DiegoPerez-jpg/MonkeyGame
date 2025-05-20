@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class BulletManager {
     ArrayList<Bullet> bullets;
     ArrayList<Bullet> addNextRoundBullets = new ArrayList<>();
+    public ArrayList<Bullet> borrarBullets = new ArrayList<>();
     public BulletManager() {
         bullets = new ArrayList<>();
     }
@@ -26,7 +27,7 @@ public class BulletManager {
     }
     public void updateBullets() {
         float t = (float)GameManager.getInstance().timer.getTime();
-        ArrayList<Bullet> borrarBullets = new ArrayList<>();
+        borrarBullets.clear();
         for (Bullet b : bullets) {
             if(b.avanzar(t)){
                 borrarBullets.add(b);

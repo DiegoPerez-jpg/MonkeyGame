@@ -23,14 +23,18 @@ public class Bullet extends Entity {
     public Monkey monkey;
     public float time;
     public boolean homingShot = true;
-    public int piercingShot = 1;
+    public int piercingShot;
     Vector vectorAlGlobo;
+    public boolean explisiveShot;
+    public float deleteOnTime ;
+
+
     public ArrayList<Balloon> balloonsHiteados = new ArrayList<>();
     public float stateBulletCooldown = 0f; //0f is not state bullet
     public ArrayList<Float> balloonTimeGetHided = new ArrayList<>();
 
     public float rangeRicochet = 32*2f;
-    public float amountRicochet = 2f;
+    public float amountRicochet = 0f;
     public Bullet(Point position, float velocity, int size, float damage, float bulletType, Balloon target,Monkey monkey) {
         super(new Texture(""), position, size);
         this.monkey = monkey;
@@ -43,6 +47,9 @@ public class Bullet extends Entity {
     public Bullet(BulletPrefab bp, float damage, Point position, Balloon target,Monkey monkey) {
         super(bp.skin, position, bp.size);
         this.velocity = bp.velocity;
+        this.explisiveShot = bp.explosiveShot;
+        this.piercingShot = bp.piercingShot;
+        this.deleteOnTime = bp.deleteOnTime;
         this.monkey = monkey;
         this.damage = damage;
         //this.bulletType = bp.bulletType;
@@ -62,16 +69,21 @@ public class Bullet extends Entity {
         }
         return null;
     }
-    public Bullet rebotar(){
+    public void rebotar(float t){
         if(rangeRicochet==0 || amountRicochet==0){
-            return null;
+            return;
         }
         Balloon b = this.getCloserBalloon();
         if(b!=null){
             System.out.println();
-            return new Bullet(monkey.bp,this.damage , this.position, b,monkey);
+            Bullet bulletLocal = new Bullet(monkey.bp,this.damage , this.position, b,monkey);
+
+            bulletLocal.setAmountRicochet(amountRicochet-1);
+            bulletLocal.balloonsHiteados.add(b);
+            bulletLocal.balloonTimeGetHided.add(t+100);
+            GameManager.getInstance().bulletManager.addBulletDuringRound(bulletLocal);
+
         }
-        return null;
     }
     public void statebulletFunction(float t) {
         if (stateBulletCooldown == 0) return;
@@ -83,9 +95,22 @@ public class Bullet extends Entity {
             }
         }
     }
+    public void explotar(){
+        if(!explisiveShot)return;
+        Bullet b = new Bullet(BulletPrefab.EXPLOSION,1,this.position,target,monkey);
+        GameManager.getInstance().bulletManager.addBulletDuringRound(b);
+
+    }
+    public void deleteOnTIme(float t){
+        deleteOnTime -= t*100;
+        if (0 > deleteOnTime) GameManager.getInstance().bulletManager.borrarBullets.add(this);
+
+    }
     public boolean avanzar(float t) {
         if(GameManager.getInstance().balloonManager.searchBalloon(target) ==-1){
-            return true;
+            if(velocity != 0){
+                return true;
+            }
         }
         //diferencia tiempo
         float dT = t - time;
@@ -104,24 +129,23 @@ public class Bullet extends Entity {
                 continue;
             }
             Vector v = createVector(b.position, this.position);
-            if (v.getMod() < 5) {
+            if(this.velocity==0){
+                System.out.println(this+"Velocidad del balloon"+velocity+"globo encontrado"+b.position);
+            }
+            if (v.getMod() < (5*size)) {
                 piercingShot -= 1;
                 b.getHit(damage);
                 balloonsHiteados.add(b);
                 if(stateBulletCooldown!=0){
                     balloonTimeGetHided.add(t);
                 }
-                Bullet bulletLocal = rebotar();
-                if(bulletLocal != null) {
-                    bulletLocal.setAmountRicochet(amountRicochet-1);
-                    bulletLocal.balloonsHiteados.add(b);
-                    bulletLocal.balloonTimeGetHided.add(t+100);
-                    GameManager.getInstance().bulletManager.addBulletDuringRound(bulletLocal);
-                }
+                rebotar(t);
+                explotar();
+                deleteOnTIme(dT);
                 if (piercingShot <= 0) {
                     return true;
                 }
-                return false; // Se elimina la bala
+                 // Se elimina la bala
             }
         }
 
@@ -137,5 +161,13 @@ public class Bullet extends Entity {
 
     public float getAmountRicochet() {
         return amountRicochet;
+    }
+
+    public void setDamage(float damage) {
+        this.damage = damage;
+    }
+
+    public float getDamage() {
+        return damage;
     }
 }
