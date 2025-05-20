@@ -37,6 +37,15 @@ public class Tile { // 32x32 px each
         this.background = Color.GRASS;
         this.isGrass = true;
     }
+
+    public boolean contain(Point p){
+        if (p.x >= corners.get(0).x && p.x <= corners.get(3).x
+                && p.y >= corners.get(1).y && p.y <= corners.get(3).y) {
+            return true;
+        }
+        return false;
+    }
+
     public Point getCasilla(){
         GameManager gm = GameManager.getInstance();
         return new Point(((this.getPosition().x/gm.tileSize)+1), ((this.getPosition().y-gm.extension_y)/gm.tileSize)+1);

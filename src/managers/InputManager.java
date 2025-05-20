@@ -1,6 +1,9 @@
 package managers;
 
+import graphics.UI;
+import graphics.terrain.Tile;
 import org.lwjgl.glfw.GLFW;
+import utilities.math.Point;
 
 public class InputManager {
     private GameManager gm;
@@ -53,7 +56,10 @@ public class InputManager {
         //Listener botones del ratón
         GLFW.glfwSetMouseButtonCallback(window, (windowHandle, button, action, mods) -> {
             if (action == GLFW.GLFW_PRESS) {
-                if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT) {pressingLC = true;} //Click izq
+                if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT) { //Click izq
+                    pressingLC = true;
+                    click();
+                }
                 else if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {pressingRC = true;} //Click drch
             }
             if (action == GLFW.GLFW_RELEASE) {
@@ -92,6 +98,26 @@ public class InputManager {
         }
         if(pressingLC){
             //Código que se ejecutará mientras se pulse el click izquierdo
+
         }
+    }
+
+    private void click(){
+        Point mp = getMousePosition();
+        GameManager.getInstance().uiManager.unselectAll();
+        for (UI div : gm.uiManager.divs) {if (div.contain(mp)) div.trigger = true;}
+        //for (Tile tile : gm.tileManager.tiles) {if (tile.contain(mp)) System.out.println("Tile Clicked" + tile.getCasilla()); }
+    }
+
+    public Point getMousePosition() {
+        //Por como funciona la librería devuelve la posición del ratón en arrays
+        double[] xpos = new double[1], ypos = new double[1];
+        long window = GameManager.getInstance().renderer.getWindow();
+        GLFW.glfwGetCursorPos(window, xpos, ypos);
+        Point pos = new Point((float) xpos[0], (float) ypos[0]);
+        //Por como funciona la librería aunque haya setteado la posición con respecto a la esquina inf izquierda
+        //Devuelve la posición del ratón con respecto a la esquina sup drcha, así que hay que parsearlo
+        pos.y = gm.height - pos.y;
+        return pos;
     }
 }

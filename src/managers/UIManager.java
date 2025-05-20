@@ -1,0 +1,105 @@
+package managers;
+
+import graphics.Color;
+import graphics.Texture;
+import graphics.UI;
+import utilities.Util;
+import utilities.math.Point;
+
+import java.util.ArrayList;
+
+public class UIManager {
+    public UI asideUI, bottomUI;
+    public ArrayList<UI> divs, monkeyShop;
+    public UIManager() {
+        this.divs = new ArrayList<>();
+        this.monkeyShop = new ArrayList<>();
+    }
+
+    public void initUI(){
+        GameManager gm = GameManager.getInstance();
+        //sentido antihorario empezando por arriba la izq
+        this.asideUI = addUI(Color.BLUEUI, new ArrayList<>() {{
+            add(new Point(gm.gameWidth, gm.height)); add(new Point(gm.gameWidth, gm.extension_y));
+            add(new Point(gm.width, gm.extension_y)); add(new Point(gm.width, gm.height));
+        }}, false, 10, 15);
+
+        this.bottomUI = addUI(Color.BLUEUI2, new ArrayList<>() {{
+            add(new Point(0, gm.extension_y)); add(new Point(0, 0));
+            add(new Point(gm.width, 0)); add(new Point(gm.width, gm.extension_y));
+        }}, false, 10, 0);
+
+        UI bui1 = bottomUI.addSupport(0.13f);
+            bui1.setVerticalAlign(true);
+            bui1.addLayout(0.8f, Color.BLUE); //Monkey pfp
+            bui1.addLayout(0.2f, Color.RED); //Monkey name
+        UI bui2 = bottomUI.addSupport(0.29f);
+            UI bui21 = bui2.addSupport(0.3f); //Parte izq
+                bui21.setVerticalAlign(true);
+                bui21.addSupport(0.2f);
+                bui21.addLayout(0.6f, Color.GREEN); //foto
+            UI bui22 = bui2.addLayout(0.7f, Color.MAGENTA); //txt
+        UI bui3 = bottomUI.addSupport(0.29f);
+            UI bui31 = bui3.addSupport(0.3f); //Parte izq
+                bui31.setVerticalAlign(true);
+                bui31.addSupport(0.2f);
+                bui31.addLayout(0.6f, Color.GREEN); //foto
+            UI bui32 = bui3.addLayout(0.7f, Color.MAGENTA); //txt
+        UI bui4 = bottomUI.addSupport(0.29f);
+        UI bui41 = bui4.addSupport(0.3f); //Parte izq
+            bui41.setVerticalAlign(true);
+            bui41.addSupport(0.2f);
+            bui41.addLayout(0.6f, Color.GREEN); //foto
+        UI bui42 = bui4.addLayout(0.7f, Color.MAGENTA); //txt
+
+        //Tienda de monos
+        UI aui1 = asideUI.addSupport(0.5f);
+        aui1.setVerticalAlign(true);
+        monkeyShop.add(aui1.addLayout(0.235f, Color.GREEN));
+        monkeyShop.get(0).setTexture(new Texture("src/assets/monkeys/monkeyDarderolvl1_esc.png"));
+        monkeyShop.add(aui1.addLayout(0.235f, Color.GREEN));
+        monkeyShop.get(1).setTexture(new Texture("src/assets/monkeys/creadora de clavos esc.png"));
+        monkeyShop.add(aui1.addLayout(0.235f, Color.GREEN));
+//        monkeyShop.get(2).setTexture(new Texture(""));
+        monkeyShop.add(aui1.addLayout(0.235f, Color.GREEN));
+//        monkeyShop.get(3).setTexture(new Texture(""));
+
+        UI aui2 = asideUI.addSupport(0.5f);
+        aui2.setVerticalAlign(true);
+        monkeyShop.add(aui2.addLayout(0.235f, Color.GREEN));
+//        monkeyShop.get(4).setTexture(new Texture(""));
+        monkeyShop.add(aui2.addLayout(0.235f, Color.GREEN));
+//        monkeyShop.get(5).setTexture(new Texture(""));
+        monkeyShop.add(aui2.addLayout(0.235f, Color.GREEN));
+//        monkeyShop.get(6).setTexture(new Texture(""));
+        monkeyShop.add(aui2.addLayout(0.235f, Color.GREEN));
+//        monkeyShop.get(7).setTexture(new Texture(""));
+
+
+        this.divs.addAll(monkeyShop);
+    }
+
+    public UI addUI(Color color, ArrayList<Point> points, boolean verticalAlign, int margin, int padding){
+        UI ui = new UI(color, points, verticalAlign, margin, padding);
+        this.divs.add(ui);
+        return ui;
+    }
+
+    public void checkTriggers(){
+        for (UI monkey : monkeyShop) {
+            if (monkey.trigger) {
+                monkey.select(2);
+                monkey.trigger = false;
+            }
+        }
+    }
+
+    public void unselectAll(){
+        for (UI div : divs) {
+            if (div.selected) {
+                div.selected = false;
+                div.borderSize = 0;
+            }
+        }
+    }
+}

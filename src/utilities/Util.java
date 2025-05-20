@@ -26,4 +26,12 @@ public class Util {
         //Ángulo entre vectores = arccos(v1*v2/Mod(v1) * Mod(v2))
         return (float) Math.acos((scalarProduct(v1, v2))/(v1.getMod()*v2.getMod()));
     }
+
+    public static Vector rotate(Vector v, float angle) {
+        float alpha = getAngle(v, new Vector(1,0)); //Ángulo con respecto al eje de abscisas
+        float beta = (float) Math.toRadians(angle);
+        float x2 = (float) (v.x*Math.cos(alpha+beta)/Math.cos(alpha));
+        float y2 = (float) (v.y*Math.sin(alpha+beta)/Math.sin(alpha));
+        return new Vector(x2, y2);
+    }
 }

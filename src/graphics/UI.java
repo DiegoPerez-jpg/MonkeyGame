@@ -1,5 +1,6 @@
 package graphics;
 
+import managers.GameManager;
 import utilities.Util;
 import utilities.math.Point;
 
@@ -12,16 +13,23 @@ public class UI {
     public ArrayList<UI> layouts;
     private boolean verticalAlign, alignCenter, support;
     private float space; //variable entre 0-1 que representa el espacio ocupado la UI
+    public boolean trigger; //variable activada cuando ocurre un evento con el layout
+    public boolean selected;
+    public Texture texture;
     public UI(Color color, ArrayList<Point> corners, boolean vertical){ //Puntos en sentido antihorario empezando arriba a la izq
         this.background = color;
         this.corners = corners;
         this.layouts = new ArrayList<>();
         this.borderSize = 0;
+        this.borderColor = Color.BLACK;
         this.padding = 0;
         this.margin = 0;
         this.space = 0;
         this.verticalAlign = vertical;
         this.support = false;
+        this.trigger = false;
+        this.selected = false;
+        this.texture = null;
     }
     public UI(Color color, ArrayList<Point> corners, boolean vertical, int borderSize, Color borderColor){
         this(color, corners, vertical);
@@ -69,10 +77,10 @@ public class UI {
             int start_y = Math.round(fatherHeight*(1-space)) - margin;
             int end_y = Math.round(fatherHeight*(1-appendSpace-space)) + margin;
             ui = new UI(color, new ArrayList<>() {{
-                add(toGlobal(margin, end_y));
                 add(toGlobal(margin, start_y));
-                add(toGlobal(fatherWidth-margin, start_y));
+                add(toGlobal(margin, end_y));
                 add(toGlobal(fatherWidth-margin, end_y));
+                add(toGlobal(fatherWidth-margin, start_y));
             }}, true, padding, childPadding, borderSize, borderColor);
         }
         else{
@@ -87,6 +95,7 @@ public class UI {
         }
         this.space += appendSpace;
         layouts.add(ui);
+        GameManager.getInstance().uiManager.divs.add(ui);
         return ui;
     }
     public UI addLayout(float appendSpace, Color color){
@@ -100,8 +109,16 @@ public class UI {
 
     public void draw(){
         if (!support) {
-            if (borderSize == 0) Draw.drawPoly(corners, background);
-            else Draw.drawBorderPoly(corners, background, borderSize, borderColor);
+            if (texture == null) {
+                if (borderSize == 0) Draw.drawPoly(corners, background);
+                else Draw.drawBorderPoly(corners, background, borderSize, borderColor);
+            }
+            else {
+                texture.render(corners.get(1));
+                if (borderSize != 0) {
+                    Draw.drawBorderPoly(corners, Color.TRANSPARENT, borderSize, borderColor);
+                }
+            }
         }
     }
 
@@ -109,4 +126,19 @@ public class UI {
         this.draw();
         for (UI div : layouts){div.drawRecursively();}
     }
+
+    public boolean contain(Point p){
+        if (p.x >= corners.get(0).x && p.x <= corners.get(3).x
+                && p.y >= corners.get(1).y && p.y <= corners.get(3).y) {
+            return true;
+        }
+        return false;
+    }
+
+    public void select(int thickness){
+        this.borderSize = thickness;
+        this.selected = true;
+    }
+
+    public void setTexture(Texture texture){this.texture = texture;}
 }

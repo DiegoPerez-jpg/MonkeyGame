@@ -23,4 +23,12 @@ public class TileManager {
         for (Tile tile : tiles){if (tile.getCasilla().x == x && tile.getCasilla().y == y) return tile;}
         return null;
     }
+
+    public Tile searchTileGC(float x, float y){
+        for (Tile tile : tiles){if (tile.getPosition().x == x && tile.getPosition().y == y) return tile;}
+        return null;
+    }
+
+    public Tile searchTile(Point p){return searchTile(p.x, p.y);}
+    public Tile searchTileGC(Point p){return searchTileGC(p.x, p.y);}
 }
