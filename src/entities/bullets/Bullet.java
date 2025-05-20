@@ -75,7 +75,6 @@ public class Bullet extends Entity {
         }
         Balloon b = this.getCloserBalloon();
         if(b!=null){
-            System.out.println();
             Bullet bulletLocal = new Bullet(monkey.bp,this.damage , this.position, b,monkey);
 
             bulletLocal.setAmountRicochet(amountRicochet-1);
@@ -129,9 +128,6 @@ public class Bullet extends Entity {
                 continue;
             }
             Vector v = createVector(b.position, this.position);
-            if(this.velocity==0){
-                System.out.println(this+"Velocidad del balloon"+velocity+"globo encontrado"+b.position);
-            }
             if (v.getMod() < (5*size)) {
                 piercingShot -= 1;
                 b.getHit(damage);
