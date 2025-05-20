@@ -1,5 +1,6 @@
 package managers;
 
+import entities.monkeys.ClaveMachineMono;
 import entities.monkeys.TribeMonkey;
 import graphics.Color;
 import graphics.Renderer;
@@ -56,7 +57,8 @@ public class GameManager {
         this.bulletManager = new BulletManager();
         this.renderer = new Renderer(width, height);
         this.inputManager = new InputManager();
-        monkeyManager.addMonkey(new TribeMonkey(tileManager.searchTile(4,5)));
+//        monkeyManager.addMonkey(new TribeMonkey(tileManager.searchTile(4,5)));
+        monkeyManager.addMonkey(new ClaveMachineMono(tileManager.searchTile(9,9)));
         getCurrentLevel().crearCamino();
         initUI();
     }

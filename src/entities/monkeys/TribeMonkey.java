@@ -20,24 +20,24 @@ public class TribeMonkey extends Monkey implements UpgradableMonkey{
         mm = GameManager.getInstance().monkeyManager;
     }
     public void upgradeFirst(){
-        if(this.mejoras[0]==0){
+        this.mejoras[0] = this.mejoras[0]+1;
+        if(this.mejoras[0]==1){
 
             recibo = true;}
-        if(this.mejoras[0]==1){
+        if(this.mejoras[0]==2){
             aportoDamage = true;
             this.mm.dañoTribu += damageAportado ;
         }
-        if(this.mejoras[0]==2){
+        if(this.mejoras[0]==3){
             aportoRate = true;
             this.mm.dañoTribu += rateAportado;
         }
-        if(this.mejoras[0]==4){
+        if(this.mejoras[0]==5){
             tasaAportado = 2;
             this.mm.dañoTribu += damageAportado;
             this.mm.dañoTribu += rateAportado;
         }
 
-        this.mejoras[0] = this.mejoras[0]+1;
 
     }
     public void upgradeSecond(){

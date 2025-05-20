@@ -12,13 +12,18 @@ import utilities.Util;
 
 public class Monkey extends Entity {
     String nombre;
-    float range;
+    protected float range;
     float cost;
     float rate;
     public BulletPrefab bp;
     float lastShotTime;
     int[] mejoras;
     boolean canDetectCamos = false;
+
+
+
+    int cantidadBalasDisparadas = 1;
+
     public Monkey(int size, BulletPrefab bp, float rate, float cost, float range, String nombre, String skin, Tile tile) {
         super((new Texture(skin)), tile.getPosition(),size);
         mejoras = new int[]{0,0,0};
@@ -52,10 +57,12 @@ public class Monkey extends Entity {
     }
     public Bullet disparar(float time){
         if(time-lastShotTime>rate || lastShotTime==0){
-            Balloon b = this.getCloserBalloon();
-            if(b!=null){
-                lastShotTime = time;
-                return new Bullet(bp,1 , this.position, b,this);
+            for (int i = 0; i < cantidadBalasDisparadas; i++) {
+                Balloon b = this.getCloserBalloon();
+                if(b!=null){
+                    lastShotTime = time;
+                    return new Bullet(bp,1 , this.position, b,this);
+                }
             }
         }
         return null;
@@ -63,5 +70,13 @@ public class Monkey extends Entity {
 
     public void setRate(float rate) {
         this.rate = rate;
+    }
+
+    public int getCantidadBalasDisparadas() {
+        return cantidadBalasDisparadas;
+    }
+
+    public void setCantidadBalasDisparadas(int cantidadBalasDisparadas) {
+        this.cantidadBalasDisparadas = cantidadBalasDisparadas;
     }
 }
