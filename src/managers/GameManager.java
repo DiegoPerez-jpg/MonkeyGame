@@ -58,20 +58,57 @@ public class GameManager {
         this.inputManager = new InputManager();
         monkeyManager.addMonkey(new TribeMonkey(tileManager.searchTile(4,5)));
         getCurrentLevel().crearCamino();
+        initUI();
+    }
+
+    private void initUI(){
         //sentido antihorario empezando por arriba la izq
         this.asideUI = new UI(Color.BLUEUI, new ArrayList<>() {{
             add(new Point(gameWidth, height)); add(new Point(gameWidth, extension_y));
             add(new Point(width, extension_y)); add(new Point(width, height));
-        }}, true, 20, 0);
+        }}, false, 10, 15);
         this.bottomUI = new UI(Color.BLUEUI2, new ArrayList<>() {{
             add(new Point(0, extension_y)); add(new Point(0, 0));
             add(new Point(width, 0)); add(new Point(width, extension_y));
-        }}, false, 20, 0);
+        }}, false, 10, 0);
 
-        asideUI.addLayout(0.2f, Color.YELLOW);
-        asideUI.addLayout(0.4f, Color.GREEN);
-        bottomUI.addLayout(0.2f, Color.YELLOW);
-        bottomUI.addLayout(0.4f, Color.GREEN);
+
+        UI bui1 = bottomUI.addLayout(0.13f, Color.ORANGE);
+            bui1.setVerticalAlign(true);
+            bui1.addLayout(0.8f, Color.BLUE); //Monkey pfp
+            bui1.addLayout(0.2f, Color.RED); //Monkey name
+        UI bui2 = bottomUI.addLayout(0.29f, Color.ORANGE);
+            UI bui21 = bui2.addSupport(0.3f); //Parte izq
+                bui21.setVerticalAlign(true);
+                bui21.addSupport(0.2f);
+                bui21.addLayout(0.6f, Color.GREEN); //foto
+            UI bui22 = bui2.addLayout(0.7f, Color.MAGENTA); //txt
+        UI bui3 = bottomUI.addLayout(0.29f, Color.ORANGE);
+            UI bui31 = bui3.addSupport(0.3f); //Parte izq
+                bui31.setVerticalAlign(true);
+                bui31.addSupport(0.2f);
+                bui31.addLayout(0.6f, Color.GREEN); //foto
+            UI bui32 = bui3.addLayout(0.7f, Color.MAGENTA); //txt
+        UI bui4 = bottomUI.addLayout(0.29f, Color.ORANGE);
+            UI bui41 = bui4.addSupport(0.3f); //Parte izq
+                bui41.setVerticalAlign(true);
+                bui41.addSupport(0.2f);
+                bui41.addLayout(0.6f, Color.GREEN); //foto
+            UI bui42 = bui4.addLayout(0.7f, Color.MAGENTA); //txt
+
+        UI aui1 = asideUI.addLayout(0.5f, Color.ORANGE);
+            aui1.setVerticalAlign(true);
+                aui1.addLayout(0.25f, Color.GREEN);
+                aui1.addLayout(0.25f, Color.GREEN);
+                aui1.addLayout(0.25f, Color.GREEN);
+                aui1.addLayout(0.25f, Color.GREEN);
+
+        UI aui2 = asideUI.addLayout(0.5f, Color.ORANGE);
+            aui2.setVerticalAlign(true);
+                aui2.addLayout(0.25f, Color.GREEN);
+                aui2.addLayout(0.25f, Color.GREEN);
+                aui2.addLayout(0.25f, Color.GREEN);
+                aui2.addLayout(0.25f, Color.GREEN);
     }
 
     public void play(){

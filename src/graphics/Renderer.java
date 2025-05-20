@@ -69,10 +69,8 @@ public class Renderer {
         for(Bullet b : bulletManager.getBullets()){b.skin.render(b.position);}
 
         //Render interfaces y subinterfaces
-        Draw.drawPoly(gm.asideUI.corners, gm.asideUI.background);
-        for (UI div : gm.asideUI.layouts){Draw.drawPoly(div.corners, div.background);}
-        Draw.drawPoly(gm.bottomUI.corners, gm.bottomUI.background);
-        for (UI div : gm.bottomUI.layouts){Draw.drawPoly(div.corners, div.background);}
+        gm.asideUI.drawRecursively();
+        gm.bottomUI.drawRecursively();
     }
 
     public void clean() { //Libera los recursos
