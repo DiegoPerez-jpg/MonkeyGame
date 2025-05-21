@@ -19,7 +19,7 @@ public class ClaveMachineMono extends Monkey implements UpgradableMonkey {
     boolean balaExplosiva = false;
     int rangeBalaExplosiva = 0;
     public ClaveMachineMono(Tile tile) {
-        super(1, BulletPrefab.BULLETCLAVO,0.1f,100,2,"Maquina de Clavos","src/assets/monkeyDarderolvl1.png",tile);
+        super(1, BulletPrefab.BULLETCLAVO,0.1f,100,2,"Maquina de Clavos","src/assets/creadora de clavos.png",tile);
     }
 
     public Tile buscarTileCercana(){
@@ -60,7 +60,7 @@ public class ClaveMachineMono extends Monkey implements UpgradableMonkey {
                 b.piercingShot += this.piercingShotDamage;
                 b.explisiveShot = balaExplosiva;
                 b.setDamage(b.getDamage()+damage);
-                b.setSize(b.getSize()+rangeBalaExplosiva);
+                b.size+=rangeBalaExplosiva;
                 clavosSpawneados.add(b);
                 return b;
 
@@ -69,16 +69,19 @@ public class ClaveMachineMono extends Monkey implements UpgradableMonkey {
         return null;
     }
     public void upgradeFirst(){
+        if(this.mejoras[0]==5)return;
         setRate(this.rate-0.12f);
         this.mejoras[0] = this.mejoras[0]+1;
     }
     public void upgradeSecond(){
+        if(this.mejoras[1]==5)return;
         this.piercingShotDamage+=1;
-        this.mejoras[0] = this.mejoras[0]+1;
+        this.mejoras[1] = this.mejoras[1]+1;
     }
     public void upgradeThird(){
-        this.mejoras[0] = this.mejoras[0]+1;
-        switch (this.mejoras[0]){
+        if(this.mejoras[2]==5)return;
+        this.mejoras[3] = this.mejoras[3]+1;
+        switch (this.mejoras[3]){
             case 1:
                damage++;
                break;

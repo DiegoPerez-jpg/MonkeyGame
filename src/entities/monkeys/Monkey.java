@@ -10,7 +10,7 @@ import managers.GameManager;
 import utilities.math.Vector;
 import utilities.Util;
 
-public class Monkey extends Entity {
+public abstract class Monkey extends Entity {
     String nombre;
     protected float range;
     float cost;
@@ -78,5 +78,26 @@ public class Monkey extends Entity {
 
     public void setCantidadBalasDisparadas(int cantidadBalasDisparadas) {
         this.cantidadBalasDisparadas = cantidadBalasDisparadas;
+    }
+    public boolean canIUpgradeFirst(){
+        if(this.mejoras[0]==5)return false;
+        if(this.mejoras[1]==3)return false;
+        if(this.mejoras[1]==3)return false;
+        if(this.mejoras[1]>1&&this.mejoras[2]>1)return false;
+        return true;
+    }
+    public boolean canIUpgradeSecond(){
+        if(this.mejoras[1]==5)return false;
+        if(this.mejoras[0]==3)return false;
+        if(this.mejoras[2]==3)return false;
+        if(this.mejoras[0]>1&&this.mejoras[2]>1)return false;
+        return true;
+    }
+    public boolean canIUpgradeThird(){
+        if(this.mejoras[2]==5)return false;
+        if(this.mejoras[0]==3)return false;
+        if(this.mejoras[1]==3)return false;
+        if(this.mejoras[0]>1&&this.mejoras[1]>1)return false;
+        return true;
     }
 }

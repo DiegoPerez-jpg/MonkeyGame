@@ -6,7 +6,7 @@ import graphics.Texture;
 import managers.GameManager;
 import utilities.math.Point;
 
-public class Entity {
+public abstract class Entity {
     public Texture skin;
     public Point position;
     public int size;
