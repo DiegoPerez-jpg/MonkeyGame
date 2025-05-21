@@ -47,30 +47,45 @@ public class UI {
         this.margin = margin;
         this.padding = padding;
     }
-
+    /*
+    * Transforma un punto de coordenadas locales dentro del layout
+    * a coordenadas globales
+     */
     public Point toGlobal(Point point){ //Pasa las coordenadas locales de la UI (respecto esquina inf izq) a globales
         return new Point(point.x + corners.get(1).x, point.y + corners.get(1).y);
     }
-
+    /*
+     * Transforma un punto de coordenadas locales dentro del layout
+     * a coordenadas globales
+     */
     public Point toGlobal(float x, float y){return toGlobal(new Point(x, y));}
 
-    public void setVerticalAlign(boolean vertical){
+    public void setVerticalAlign(boolean vertical) throws UINeedsToBeEmptyEx{
         if (space == 0) this.verticalAlign = vertical;
-        else System.out.println("Para modificar la horientación la UI debe estar vacia");
+        else throw new UINeedsToBeEmptyEx();
     }
 
-    public void setJustifyContent(boolean value){
+    public void setJustifyContent(boolean value) throws UINeedsToBeEmptyEx{
         if (space == 0) this.alignCenter = value;
-        else System.out.println("Para modificar alignCenter la UI debe estar vacia");
+        else throw new UINeedsToBeEmptyEx();
     }
 
+    /*
+    * Establece un layout como soporte (será invisible
+    *  y solo servirá de apoyo a otros layouts)
+    * */
     public void setSupport(boolean value){this.support = value;}
 
-    public UI addLayout(float appendSpace, Color color, int borderSize, Color borderColor, int childPadding){
-        if (space+appendSpace > 1){
-            System.out.println("No cabe en el layout");
-            return null;
-        }
+    /*
+     * Añade un layout dentro de la interfaz
+     *  @param appendSapce Valor entre 0-1 que determina la proporción que aumentará en el layout
+     *  @param color Color del layout
+     *  @param borderSize grosor del borde
+     *  @param borderColor color del borde
+     *  @param childPadding margen de los layouts hijos con el borde del padre
+     * */
+    public UI addLayout(float appendSpace, Color color, int borderSize, Color borderColor, int childPadding) throws OutOfBoundEx{
+        if (space+appendSpace > 1) throw new OutOfBoundEx();
         UI ui = null;
         int fatherWidth = Math.round(Util.createVector(corners.get(0), corners.get(3)).getMod());
         int fatherHeight = Math.round(Util.createVector(corners.get(0), corners.get(1)).getMod());
@@ -99,15 +114,25 @@ public class UI {
         GameManager.getInstance().uiManager.divs.add(ui);
         return ui;
     }
+    /*
+     * Añade un layout dentro de la interfaz
+     *  @param appendSapce Valor entre 0-1 que determina la proporción que aumentará en el layout
+     *  @param color Color del layout
+     * */
     public UI addLayout(float appendSpace, Color color){
         return addLayout(appendSpace, color, 0, Color.BLACK, 0);
     }
+
+    /*
+     * Añade un layout vacio dentro de la interfaz para usar de soporte
+     *  @param appendSapce Valor entre 0-1 que determina la proporción que aumentará en el layout
+     * */
     public UI addSupport(float appendSpace){
         UI ui = addLayout(appendSpace, Color.BLACK);
         ui.setSupport(true);
         return ui;
     }
-
+    /*Dibuja/renderiza el layout*/
     public void draw(){
         if (!support) {
             if (texture == null) {
@@ -123,11 +148,13 @@ public class UI {
         }
     }
 
+    /*Dibuja/renderiza el layout y sus descendientes*/
     public void drawRecursively(){
         this.draw();
         for (UI div : layouts){div.drawRecursively();}
     }
 
+    /*Devuelve true/false dependiendo de si un punto es contenido o no en una interfaz*/
     public boolean contain(Point p){
         if (p.x >= corners.get(0).x && p.x <= corners.get(3).x
                 && p.y >= corners.get(1).y && p.y <= corners.get(3).y) {

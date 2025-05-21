@@ -53,11 +53,6 @@ public class GameManager {
         this.renderer = new Renderer(width, height);
         uiManager.initUI();
         this.inputManager = new InputManager();
-//        monkeyManager.addMonkey(new TribeMonkey(tileManager.searchTile(4,5)));
-//        monkeyManager.addMonkey(new ClaveMachineMono(tileManager.searchTile(9,9)));
-//        monkeyManager.setCanonMonkey(tileManager.searchTile(6,7));
-//        monkeyManager.setTribeMonkey(tileManager.searchTile(7,6));
-        monkeyManager.setMachineMonkey(tileManager.searchTile(6,5));
         getCurrentLevel().crearCamino();
     }
 
