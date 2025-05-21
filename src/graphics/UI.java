@@ -12,6 +12,8 @@ public class UI {
     public int borderSize, padding, margin;
     public ArrayList<UI> layouts;
     private boolean verticalAlign, alignCenter, support;
+
+
     private float space; //variable entre 0-1 que representa el espacio ocupado la UI
     public boolean trigger; //variable activada cuando ocurre un evento con el layout
     public boolean selected;
