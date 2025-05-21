@@ -1,9 +1,14 @@
 package managers;
 
 import entities.monkeys.TribeMonkey;
+import entities.monkeys.MonoCanon;
+import graphics.Color;
 import graphics.Renderer;
 import levels.Level;
 import utilities.Timer;
+import utilities.math.Point;
+
+import java.util.ArrayList;
 
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 
@@ -50,7 +55,9 @@ public class GameManager {
         this.renderer = new Renderer(width, height);
         uiManager.initUI();
         this.inputManager = new InputManager();
-        monkeyManager.addMonkey(new TribeMonkey(tileManager.searchTile(4,5)));
+//        monkeyManager.addMonkey(new TribeMonkey(tileManager.searchTile(4,5)));
+//        monkeyManager.addMonkey(new ClaveMachineMono(tileManager.searchTile(9,9)));
+        monkeyManager.addMonkey(new MonoCanon(tileManager.searchTile(6,7)));
         getCurrentLevel().crearCamino();
     }
 

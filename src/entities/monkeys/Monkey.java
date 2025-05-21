@@ -10,36 +10,59 @@ import managers.GameManager;
 import utilities.math.Vector;
 import utilities.Util;
 
-public class Monkey extends Entity {
+import java.util.ArrayList;
+
+
+public abstract class Monkey extends Entity {
+    String[][] srcImagenesDeUpgrades;
+    String[] srcFirstImagenDeUpgrades;
+    String[] srcSecondImagenDeUpgrades;
+    String[] srcThirdImagenDeUpgrades;
     String nombre;
-    float range;
+
+    protected float range;
+
     float cost;
     float rate;
     public BulletPrefab bp;
     float lastShotTime;
     int[] mejoras;
     boolean canDetectCamos = false;
+    int cantidadBalasDisparadas = 1;
+
     public Monkey(int size, BulletPrefab bp, float rate, float cost, float range, String nombre, String skin, Tile tile) {
-        super((new Texture(skin)), tile.getPosition(),size);
-        mejoras = new int[]{0,0,0};
+        super((new Texture(skin)), tile.getPosition(), size);
+        mejoras = new int[]{0, 0, 0};
         this.bp = bp;
         this.rate = rate;
         this.cost = cost;
-        this.range = range*GameManager.getInstance().tileSize;
+        this.range = range * GameManager.getInstance().tileSize;
         this.nombre = nombre;
     }
+
     public Monkey(int size, BulletPrefab bp, float rate, float cost, float range, String nombre, String skin, Tile tile, boolean canDetectCamos) {
-        super((new Texture(skin)), tile.getPosition(),size);
-        mejoras = new int[]{0,0,0};
+        super((new Texture(skin)), tile.getPosition(), size);
+        mejoras = new int[]{0, 0, 0};
         this.bp = bp;
         this.rate = rate;
         this.cost = cost;
-        this.range = range*GameManager.getInstance().tileSize;
+        this.range = range * GameManager.getInstance().tileSize;
         this.nombre = nombre;
         this.canDetectCamos = canDetectCamos;
+        srcFirstImagenDeUpgrades = new String[]{"src/assets/espada lvl1","src/assets/espada lvl2","src/assets/espada lvl3","src/assets/espada lvl4","src/assets/espada lvl5"};
+        srcSecondImagenDeUpgrades = new String[]{"src/assets/rate1","src/assets/rate2","src/assets/rate3","src/assets/rate4","src/assets/rate5"};
+        srcThirdImagenDeUpgrades = new String[]{"src/assets/clan1","src/assets/clan2","src/assets/clan3","src/assets/clan4","src/assets/clan5"};
+
+        // Declaras el array que contiene esos tres arrays
+        srcImagenesDeUpgrades = new String[][] {
+                srcFirstImagenDeUpgrades,
+                srcSecondImagenDeUpgrades,
+                srcThirdImagenDeUpgrades
+        };
     }
-    protected Balloon getCloserBalloon(){
-        for(Balloon b : GameManager.getInstance().balloonManager.getBalloons()) {
+
+    protected Balloon getCloserBalloon() {
+        for (Balloon b : GameManager.getInstance().balloonManager.getBalloons()) {
             if (b.isACamoBalloon && !canDetectCamos) {
                 continue;
             }
@@ -50,18 +73,64 @@ public class Monkey extends Entity {
         }
         return null;
     }
-    public Bullet disparar(float time){
-        if(time-lastShotTime>rate || lastShotTime==0){
-            Balloon b = this.getCloserBalloon();
-            if(b!=null){
-                lastShotTime = time;
-                return new Bullet(bp,1 , this.position, b,this);
+
+    public Bullet disparar(float time) {
+        if (time - lastShotTime > rate || lastShotTime == 0) {
+            for (int i = 0; i < cantidadBalasDisparadas; i++) {
+                Balloon b = this.getCloserBalloon();
+                if (b != null) {
+                    lastShotTime = time;
+                    return new Bullet(bp, 1, this.position, b, this);
+                }
             }
         }
         return null;
     }
 
+
     public void setRate(float rate) {
         this.rate = rate;
+    }
+
+    public int getCantidadBalasDisparadas() {
+        return cantidadBalasDisparadas;
+    }
+
+    public void setCantidadBalasDisparadas(int cantidadBalasDisparadas) {
+        this.cantidadBalasDisparadas = cantidadBalasDisparadas;
+    }
+
+    public boolean canIUpgradeFirst() {
+        if (this.mejoras[0] == 5) return false;
+        if (this.mejoras[1] == 3) return false;
+        if (this.mejoras[2] == 3) return false;
+        if (this.mejoras[1] > 1 && this.mejoras[2] > 1) return false;
+        return true;
+    }
+
+    public boolean canIUpgradeSecond() {
+        if (this.mejoras[1] == 5) return false;
+        if (this.mejoras[0] == 3) return false;
+        if (this.mejoras[2] == 3) return false;
+        if (this.mejoras[0] > 1 && this.mejoras[2] > 1) return false;
+        return true;
+    }
+
+    public boolean canIUpgradeThird() {
+        if (this.mejoras[2] == 5) return false;
+        if (this.mejoras[0] == 3) return false;
+        if (this.mejoras[1] == 3) return false;
+        if (this.mejoras[0] > 1 && this.mejoras[1] > 1) return false;
+        return true;
+    }
+
+    public String getFirstImageUpgrade(){
+        return this.srcImagenesDeUpgrades[0][this.mejoras[0]];
+    }
+    public String getSecondImageUpgrade(){
+        return this.srcImagenesDeUpgrades[1][this.mejoras[1]];
+    }
+    public String getThirdImageUpgrade(){
+        return this.srcImagenesDeUpgrades[2][this.mejoras[2]];
     }
 }

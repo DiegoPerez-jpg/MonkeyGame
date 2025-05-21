@@ -23,6 +23,7 @@ public class BalloonManager {
         amountBalloon.add(new ArrayList<>());
         amountBalloon.add(new ArrayList<>());
         amountBalloon.get(0).add(100);
+        amountBalloon.get(0).add(100);
         this.waveDurantion = new ArrayList<>();
         waveDurantion.add(25f);
         waveDurantion.add(100f);

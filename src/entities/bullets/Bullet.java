@@ -33,6 +33,10 @@ public class Bullet extends Entity {
     public float stateBulletCooldown = 0f; //0f is not state bullet
     public ArrayList<Float> balloonTimeGetHided = new ArrayList<>();
 
+
+    public int cantidadDispersion=0;
+    public Vector vectorDireccion;
+
     public float rangeRicochet = 32*2f;
     public float amountRicochet = 0f;
     public Bullet(Point position, float velocity, int size, float damage, float bulletType, Balloon target,Monkey monkey) {
@@ -50,6 +54,7 @@ public class Bullet extends Entity {
         this.explisiveShot = bp.explosiveShot;
         this.piercingShot = bp.piercingShot;
         this.deleteOnTime = bp.deleteOnTime;
+        this.cantidadDispersion = bp.cantidadDispersion;
         this.monkey = monkey;
         this.damage = damage;
         //this.bulletType = bp.bulletType;
@@ -105,19 +110,36 @@ public class Bullet extends Entity {
         if (0 > deleteOnTime) GameManager.getInstance().bulletManager.borrarBullets.add(this);
 
     }
+    public void dividir(Vector v,float t, Balloon balloon){
+        ArrayList<Vector> vectors= Util.generateNVectores(v,cantidadDispersion);
+        if(vectors==null)return;
+        for(Vector vector : vectors){
+            Bullet b = new Bullet(BulletPrefab.BULLETSTRAIGHT,1,this.position,target,monkey);
+            b.vectorDireccion = vector;
+            b.balloonsHiteados.add(balloon);
+            b.balloonTimeGetHided.add(t+100);
+            GameManager.getInstance().bulletManager.addBulletDuringRound(b);
+        }
+    }
     public boolean avanzar(float t) {
         if(GameManager.getInstance().balloonManager.searchBalloon(target) ==-1){
-            if(velocity != 0){
+            if(velocity != 0 && cantidadDispersion != 0){
                 return true;
             }
         }
         //diferencia tiempo
         float dT = t - time;
         this.time = t;
-        if(homingShot || vectorAlGlobo == null){
-            vectorAlGlobo = createVector(target.position, this.position);
+        Vector vectorVelocidad;
+        if(vectorDireccion == null){
+
+            if(homingShot || vectorAlGlobo == null){
+                vectorAlGlobo = createVector(target.position, this.position);
+            }
+            vectorVelocidad = vectorAlGlobo.normalize().multiply(velocity);
+        } else {
+            vectorVelocidad = vectorDireccion.normalize().multiply(velocity);
         }
-        Vector vectorVelocidad = vectorAlGlobo.normalize().multiply(velocity);
 
         // x = x0 + vt
         this.position = this.position.add(vectorVelocidad.multiply(dT));
@@ -137,6 +159,7 @@ public class Bullet extends Entity {
                 }
                 rebotar(t);
                 explotar();
+                dividir(vectorAlGlobo,t,b);
                 deleteOnTIme(dT);
                 if (piercingShot <= 0) {
                     return true;

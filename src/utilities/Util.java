@@ -3,6 +3,8 @@ package utilities;
 import utilities.math.Point;
 import utilities.math.Vector;
 
+import java.util.ArrayList;
+
 public class Util {
     /**
      * @param pf punto final del vector creado
@@ -28,10 +30,22 @@ public class Util {
     }
 
     public static Vector rotate(Vector v, float angle) {
-        float alpha = getAngle(v, new Vector(1,0)); //Ángulo con respecto al eje de abscisas
-        float beta = (float) Math.toRadians(angle);
-        float x2 = (float) (v.x*Math.cos(alpha+beta)/Math.cos(alpha));
-        float y2 = (float) (v.y*Math.sin(alpha+beta)/Math.sin(alpha));
+        float radians = (float) Math.toRadians(angle);
+        float cos = (float) Math.cos(radians);
+        float sin = (float) Math.sin(radians);
+        float x2 = v.x * cos - v.y * sin;
+        float y2 = v.x * sin + v.y * cos;
         return new Vector(x2, y2);
+    }
+    public static ArrayList<Vector> generateNVectores(Vector v, int n){
+        if (n==0)return null;
+        float angulo = 360/n;
+        ArrayList<Vector> salida = new ArrayList<>();
+        Vector anteriorVector = v;
+        for (int i = 0; i < n; i++) {
+            anteriorVector = rotate(anteriorVector, i * angulo);
+            salida.add(anteriorVector);
+        }
+        return salida;
     }
 }
