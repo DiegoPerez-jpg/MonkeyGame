@@ -19,5 +19,72 @@
             <corner>19-13</corner>
             <corner>19-15</corner> <!--Casilla de salida de los globos-->
         </corners>
+        <waves>
+            <wave>
+                <tiempo>10</tiempo>
+                <balloons>
+                    <balloon>10</balloon>
+                </balloons>
+            </wave>
+
+            <wave>
+                <tiempo>10</tiempo>
+                <balloons>
+                    <balloon>10</balloon>
+                    <balloon>20</balloon>
+                </balloons>
+            </wave>
+
+            <wave>
+                <tiempo>10</tiempo>
+                <balloons>
+                    <balloon>10</balloon>
+                </balloons>
+            </wave>
+
+            <wave>
+                <tiempo>10</tiempo>
+                <balloons>
+                    <balloon>10</balloon>
+                </balloons>
+            </wave>
+            <wave>
+                <tiempo>10</tiempo>
+                <balloons>
+                    <balloon>10</balloon>
+                </balloons>
+            </wave>
+            <wave>
+                <tiempo>10</tiempo>
+                <balloons>
+                    <balloon>10</balloon>
+                </balloons>
+            </wave>
+
+            <wave>
+                <tiempo>10</tiempo>
+                <balloons>
+                    <balloon>10</balloon>
+                </balloons>
+            </wave>
+
+            <wave>
+                <tiempo>10</tiempo>
+                <balloons>
+                    <balloon>10</balloon>
+                </balloons>
+            </wave>
+            <wave>
+                <tiempo>10</tiempo>
+                <balloons>
+                    <balloon>10</balloon>
+                </balloons>
+            </wave>
+
+
+
+
+
+        </waves>
     </level>
 </levels>

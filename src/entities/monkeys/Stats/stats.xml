@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Monos [
+        <!ELEMENT Monos (Mono+)>
+
+        <!ELEMENT Mono (nombre, src, mejoras)>
+        <!ELEMENT nombre (#PCDATA)>
+        <!ELEMENT src (#PCDATA)>
+        <!ELEMENT mejoras (mejora+)>
+
+        <!ELEMENT mejora (nivel+)> <!-- Cada mejora tiene exactamente 5 niveles -->
+
+        <!ELEMENT nivel (titulo, src, descripcion)>
+        <!ELEMENT titulo (#PCDATA)>
+        <!ELEMENT descripcion (#PCDATA)>
+        ]>
+<Monos>
+    <Mono>
+        <nombre>Mono tribu</nombre>
+        <src>src/assets/monkeys/monkeyDarderolvl1.png</src>
+        <mejoras>
+            <mejora>
+                <nivel>
+                    <titulo>Daño+</titulo>
+                    <src>src/assets/espada lvl1.png</src>
+                    <descripcion>Incrementa el daño a los baloons en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Daño++</titulo>
+                    <src>src/assets/espada lvl2.png</src>
+                    <descripcion>Incrementa el daño a los baloons en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Daño+++</titulo>
+                    <src>src/assets/espada lvl3.png</src>
+                    <descripcion>Incrementa el daño a los baloons en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Daño++++</titulo>
+                    <src>src/assets/espada lvl4.png</src>
+                    <descripcion>Incrementa el daño a los baloons en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Daño Definitivo</titulo>
+                    <src>src/assets/espada lvl5.png</src>
+                    <descripcion>Incrementa el daño a los baloons en 1</descripcion>
+                </nivel>
+            </mejora>
+            <mejora>
+                <nivel>
+                    <titulo>Tear+</titulo>
+                    <src>src/assets/rate1.png</src>
+                    <descripcion>Decrementa el Tear en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Tear++</titulo>
+                    <src>src/assets/rate2.png</src>
+                    <descripcion>Decrementa el Tear en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Tear+++</titulo>
+                    <src>src/assets/rate3.png</src>
+                    <descripcion>Decrementa el Tear en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Tear++++</titulo>
+                    <src>src/assets/rate4.png</src>
+                    <descripcion>Decrementa el Tear en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Tear Definitivo</titulo>
+                    <src>src/assets/rate5.png</src>
+                    <descripcion>Decrementa el Tear en 1</descripcion>
+                </nivel>
+            </mejora>
+            <mejora>
+                <nivel>
+                    <titulo>Clan+</titulo>
+                    <src>src/assets/clan1.png</src>
+                    <descripcion>Trae el daño y velocidad aportado al clan</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Clan++</titulo>
+                    <src>src/assets/clan2.png</src>
+                    <descripcion>Aporta daño al clan</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Clan+++</titulo>
+                    <src>src/assets/clan3.png</src>
+                    <descripcion>Aporta daño al tear</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Clan++++</titulo>
+                    <src>src/assets/clan4.png</src>
+                    <descripcion>Duplica las stats aportadas</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Clan Definitivo</titulo>
+                    <src>src/assets/clan5.png</src>
+                    <descripcion>Cuatriplica las stats aportadas</descripcion>
+                </nivel>
+            </mejora>
+        </mejoras>
+    </Mono>
+    <Mono>
+        <nombre>Creadora de clavos</nombre>
+        <src>src/assets/monkeys/creadora de clavos.png</src>
+        <mejoras>
+            <mejora>
+                <nivel>
+                    <titulo>rate+</titulo>
+                    <src>src/assets/espada lvl1.png</src>
+                    <descripcion>Incrementa el rate a los baloons en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>rate++</titulo>
+                    <src>src/assets/espada lvl2.png</src>
+                    <descripcion>Incrementa el rate a los baloons en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>rate+++</titulo>
+                    <src>src/assets/espada lvl3.png</src>
+                    <descripcion>Incrementa el rate a los baloons en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>rate++++</titulo>
+                    <src>src/assets/espada lvl4.png</src>
+                    <descripcion>Incrementa el rate a los baloons en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>rate Definitivo</titulo>
+                    <src>src/assets/espada lvl5.png</src>
+                    <descripcion>Incrementa el rate a los baloons en 1</descripcion>
+                </nivel>
+            </mejora>
+            <mejora>
+                <nivel>
+                    <titulo>Piercing+</titulo>
+                    <src>src/assets/espada lvl1.png</src>
+                    <descripcion>Incrementa el Piercing a los baloons en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Piercing++</titulo>
+                    <src>src/assets/espada lvl2.png</src>
+                    <descripcion>Incrementa el Piercing a los baloons en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Piercing+++</titulo>
+                    <src>src/assets/espada lvl3.png</src>
+                    <descripcion>Incrementa el Piercing a los baloons en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Piercing++++</titulo>
+                    <src>src/assets/espada lvl4.png</src>
+                    <descripcion>Incrementa el Piercing a los baloons en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Daño Definitivo</titulo>
+                    <src>src/assets/espada lvl5.png</src>
+                    <descripcion>Incrementa el daño a los baloons en 1</descripcion>
+                </nivel>
+            </mejora>
+            <mejora>
+                <nivel>
+                    <titulo>Explosivo+</titulo>
+                    <src>src/assets/rate1.png</src>
+                    <descripcion>Incrementa el daño de la bala en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Explosivo++</titulo>
+                    <src>src/assets/rate2.png</src>
+                    <descripcion>Incrementa el daño de la bala en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Explosivo+++</titulo>
+                    <src>src/assets/rate3.png</src>
+                    <descripcion>Activa las explosiones en las balas</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Explosivo++++</titulo>
+                    <src>src/assets/rate4.png</src>
+                    <descripcion>Añade rango de explosion</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Explosivo Definitivo</titulo>
+                    <src>src/assets/rate5.png</src>
+                    <descripcion>Añade rango de explosion</descripcion>
+                </nivel>
+            </mejora>
+        </mejoras>
+    </Mono>
+    <Mono>
+        <nombre>Mono cañon</nombre>
+        <src>src/assets/monkeys/MonoCanon.png</src>
+        <mejoras>
+            <mejora>
+                <nivel>
+                    <titulo>explosion+</titulo>
+                    <src>src/assets/espada lvl1.png</src>
+                    <descripcion>Activa las balas explosivas</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>explosion++</titulo>
+                    <src>src/assets/espada lvl2.png</src>
+                    <descripcion>Incrementa el rango de explosion a los baloons en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>explosion+++</titulo>
+                    <src>src/assets/espada lvl3.png</src>
+                    <descripcion>Incrementa el rango de explosion  a los baloons en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>explosion++++</titulo>
+                    <src>src/assets/espada lvl4.png</src>
+                    <descripcion>Incrementa el rango de explosion  a los baloons en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>explosion Definitivo</titulo>
+                    <src>src/assets/espada lvl5.png</src>
+                    <descripcion>Incrementa el rango de explosion  a los baloons en 1</descripcion>
+                </nivel>
+            </mejora>
+            <mejora>
+                <nivel>
+                    <titulo>Subdivison+</titulo>
+                    <src>src/assets/espada lvl1.png</src>
+                    <descripcion>Incrementa en cuantas balas se separa</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Subdivison++</titulo>
+                    <src>src/assets/espada lvl2.png</src>
+                    <descripcion>Incrementa en cuantas balas se separa</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Subdivison+++</titulo>
+                    <src>src/assets/espada lvl3.png</src>
+                    <descripcion>Incrementa en cuantas balas se separa</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Subdivison++++</titulo>
+                    <src>src/assets/espada lvl4.png</src>
+                    <descripcion>Incrementa en cuantas balas se separa</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Subdivison Definitivo</titulo>
+                    <src>src/assets/espada lvl5.png</src>
+                    <descripcion>IIncrementa en cuantas balas se separa</descripcion>
+                </nivel>
+            </mejora>
+            <mejora>
+                <nivel>
+                    <titulo>Daño+</titulo>
+                    <src>src/assets/espada lvl1.png</src>
+                    <descripcion>Incrementa el daño a los baloons en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Daño++</titulo>
+                    <src>src/assets/espada lvl2.png</src>
+                    <descripcion>Incrementa el daño a los baloons en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Daño+++</titulo>
+                    <src>src/assets/espada lvl3.png</src>
+                    <descripcion>Incrementa el daño a los baloons en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Daño++++</titulo>
+                    <src>src/assets/espada lvl4.png</src>
+                    <descripcion>Incrementa el daño a los baloons en 1</descripcion>
+                </nivel>
+                <nivel>
+                    <titulo>Daño Definitivo</titulo>
+                    <src>src/assets/espada lvl5.png</src>
+                    <descripcion>Incrementa el daño a los baloons en 1</descripcion>
+                </nivel>
+            </mejora>
+        </mejoras>
+    </Mono>
+</Monos>

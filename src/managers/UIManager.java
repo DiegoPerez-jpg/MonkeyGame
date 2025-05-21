@@ -2,6 +2,7 @@ package managers;
 
 import graphics.Color;
 import graphics.Texture;
+import graphics.Tile;
 import graphics.UI;
 import utilities.math.Point;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 
 public class UIManager {
     public UI asideUI, bottomUI;
-    public ArrayList<UI> divs, monkeyShop;
+    public ArrayList<UI> divs, monkeyShop, monkeyUpgrades;
     public Texture shadowMonkey;
     public int currentMonkey;
     public boolean placeMonkey;
@@ -40,21 +41,24 @@ public class UIManager {
             UI bui21 = bui2.addSupport(0.3f); //Parte izq
                 bui21.setVerticalAlign(true);
                 bui21.addSupport(0.2f);
-                bui21.addLayout(0.6f, Color.GREEN); //foto
-            UI bui22 = bui2.addLayout(0.7f, Color.MAGENTA); //txt
+                bui21.addLayout(0.6f, Color.TRANSPARENT); //foto
+            UI bui22 = bui2.addLayout(0.7f, Color.TRANSPARENT); //txt
         UI bui3 = bottomUI.addSupport(0.29f);
             UI bui31 = bui3.addSupport(0.3f); //Parte izq
                 bui31.setVerticalAlign(true);
                 bui31.addSupport(0.2f);
-                bui31.addLayout(0.6f, Color.GREEN); //foto
-            UI bui32 = bui3.addLayout(0.7f, Color.MAGENTA); //txt
+                bui31.addLayout(0.6f, Color.TRANSPARENT); //foto
+            UI bui32 = bui3.addLayout(0.7f, Color.TRANSPARENT); //txt
         UI bui4 = bottomUI.addSupport(0.29f);
         UI bui41 = bui4.addSupport(0.3f); //Parte izq
             bui41.setVerticalAlign(true);
             bui41.addSupport(0.2f);
-            bui41.addLayout(0.6f, Color.GREEN); //foto
-        UI bui42 = bui4.addLayout(0.7f, Color.MAGENTA); //txt
-
+            bui41.addLayout(0.6f, Color.TRANSPARENT); //foto
+        UI bui42 = bui4.addLayout(0.7f, Color.TRANSPARENT); //txt
+        monkeyUpgrades = new ArrayList<>();
+        monkeyUpgrades.add(bui2);
+        monkeyUpgrades.add(bui3);
+        monkeyUpgrades.add(bui4);
         //Tienda de monos
         UI aui1 = asideUI.addSupport(0.5f);
         aui1.setVerticalAlign(true);
@@ -101,6 +105,24 @@ public class UIManager {
                 placeMonkey = true;
             }
         }
+        for(Tile tile: GameManager.getInstance().tileManager.tiles) {
+            if (tile.colision.trigger) {
+                tile.colision.trigger = false;
+                if(tile.monkey==null)continue;
+                GameManager.getInstance().monkeyManager.monoSelecionado = tile.monkey;
+                monkeyUpgrades.get(0).layouts.get(0).texture= new Texture(tile.monkey.getFirstImageUpgrade());
+                monkeyUpgrades.get(1).layouts.get(0).texture= new Texture(tile.monkey.getSecondImageUpgrade());
+                monkeyUpgrades.get(2).layouts.get(0).texture= new Texture(tile.monkey.getThirdImageUpgrade());
+            }
+        }
+        for (int i = 0; i < monkeyUpgrades.size(); i++) {
+            UI monkey = monkeyUpgrades.get(i);
+            if (monkey.trigger) {
+                GameManager.getInstance().monkeyManager.monoSelecionado.upgrade(i);
+                monkey.trigger = false;
+            }
+        }
+
     }
 
     public void renderShadow(){

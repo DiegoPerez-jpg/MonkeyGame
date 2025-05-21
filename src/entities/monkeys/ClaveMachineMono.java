@@ -12,6 +12,9 @@ import utilities.math.Vector;
 import java.util.ArrayList;
 
 public class ClaveMachineMono extends Monkey implements UpgradableMonkey {
+
+
+
     ArrayList<Bullet> clavosSpawneados = new ArrayList<>();
     int maxClavosSpawneados = 20;
     int piercingShotDamage = 0;
@@ -19,7 +22,7 @@ public class ClaveMachineMono extends Monkey implements UpgradableMonkey {
     boolean balaExplosiva = false;
     int rangeBalaExplosiva = 0;
     public ClaveMachineMono(Tile tile) {
-        super(1, BulletPrefab.BULLETCLAVO,0.1f,100,2,"Maquina de Clavos","src/assets/creadora de clavos.png",tile);
+        super(1,1, BulletPrefab.BULLETCLAVO,0.1f,100,2,"Maquina de Clavos","src/assets/creadora de clavos.png",tile);
     }
 
     public Tile buscarTileCercana(){
@@ -67,16 +70,19 @@ public class ClaveMachineMono extends Monkey implements UpgradableMonkey {
         }
         return null;
     }
+    @Override
     public void upgradeFirst(){
         if(this.mejoras[0]==5)return;
         setRate(this.rate-0.12f);
         this.mejoras[0] = this.mejoras[0]+1;
     }
+    @Override
     public void upgradeSecond(){
         if(this.mejoras[1]==5)return;
         this.piercingShotDamage+=1;
         this.mejoras[1] = this.mejoras[1]+1;
     }
+    @Override
     public void upgradeThird(){
         if(this.mejoras[2]==5)return;
         this.mejoras[3] = this.mejoras[3]+1;

@@ -16,8 +16,9 @@ public abstract class Entity {
         this.size = size;
     }
 
-    public void setSkin(String skin) {
-        this.skin = new Texture(skin);
+    public void setSkin(Texture skin) {
+        this.skin = skin;
+        System.out.println("xd");
     }
 
     public void setPosition(Point position) {

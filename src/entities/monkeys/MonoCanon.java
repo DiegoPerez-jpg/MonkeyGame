@@ -12,7 +12,7 @@ public class MonoCanon extends Monkey implements UpgradableMonkey{
     private int damage;
 
     public MonoCanon(Tile tile){
-        super(1, BulletPrefab.BULLETCANON,1f,500,5,"Mono cañon","src/assets/monkeys/MonoCanon.png",tile);
+        super(2,1, BulletPrefab.BULLETCANON,1f,500,5,"Mono cañon","src/assets/monkeys/MonoCanon.png",tile);
     }
 
     @Override
@@ -34,6 +34,7 @@ public class MonoCanon extends Monkey implements UpgradableMonkey{
         return null;
     }
 
+    @Override
     public void upgradeFirst(){
         if(this.mejoras[0]==5)return;
         this.mejoras[0] = this.mejoras[0]+1;
@@ -57,12 +58,14 @@ public class MonoCanon extends Monkey implements UpgradableMonkey{
 
 
     }
+    @Override
     public void upgradeSecond(){
         if(this.mejoras[1]==5)return;
         this.mejoras[1] = this.mejoras[1]+1;
         if(this.cantidadDispersion==0)cantidadDispersion=2;
         this.cantidadDispersion++;
     }
+    @Override
     public void upgradeThird(){
         if(this.mejoras[2]==5)return;
         this.mejoras[2] = this.mejoras[2]+1;

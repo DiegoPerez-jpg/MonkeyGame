@@ -21,7 +21,7 @@ public class Texture {
 
         STBImage.stbi_set_flip_vertically_on_load(true); // Flip vertical para que el origen esté abajo a la izq
         ByteBuffer image = STBImage.stbi_load(path, widthBuf, heightBuff, channels, 4);
-        if (image == null) throw new RuntimeException("Error al cargar imagen: " + STBImage.stbi_failure_reason());
+        if (image == null) throw new RuntimeException("Error al cargar imagen: " + STBImage.stbi_failure_reason()+ " with this path: " + path);
 
         int textureID = glGenTextures();
         glBindTexture(GL_TEXTURE_2D, textureID);

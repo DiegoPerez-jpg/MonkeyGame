@@ -12,6 +12,7 @@ public class Tile { // 32x32 px each
     public ArrayList<Point> corners;
     boolean isGrass;
     public Monkey monkey;
+    public UI colision;
     public Tile(Color background, Point casilla) {
         int ts = GameManager.getInstance().tileSize; //Ancho del tile
         int ey = GameManager.getInstance().extension_y; //Extensión vertical de la UI
@@ -26,6 +27,12 @@ public class Tile { // 32x32 px each
         isGrass = (background == Color.GRASS);
         monkey = null;
     }
+
+
+    public ArrayList<Point> getCorners() {
+        return corners;
+    }
+
     public Tile(Point position) {this(null, position);}
 
     public void toRoad(){
@@ -48,6 +55,10 @@ public class Tile { // 32x32 px each
     public void renderMonkey(){if (monkey != null) monkey.skin.render(position);}
 
     public void render(){
+        if(this.colision == null){
+            this.colision = GameManager.getInstance().uiManager.addUI(Color.TRANSPARENT,this.getCorners(),false,0,0);
+
+        }
         Draw.drawPoly(corners, background);
         renderMonkey();
     }

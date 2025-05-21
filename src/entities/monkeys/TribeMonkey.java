@@ -16,11 +16,12 @@ public class TribeMonkey extends Monkey implements UpgradableMonkey{
     double tasaAportado =1;
     MonkeyManager mm;
     public TribeMonkey(Tile tile) {
-        super(1, BulletPrefab.BULLETTRIBE,1,200,7,"Mono de tribu","src/assets/monkeys/monkeyDarderolvl1.png",tile);
+        super(0,1, BulletPrefab.BULLETTRIBE,1,200,7,"Mono de tribu","src/assets/monkeys/monkeyDarderolvl1.png",tile);
         mm = GameManager.getInstance().monkeyManager;
     }
+    @Override
     public void upgradeFirst(){
-        if(this.mejoras[0]==5)return;
+        System.out.println("puedo");
         this.mejoras[0] = this.mejoras[0]+1;
         if(this.mejoras[0]==1){
 
@@ -41,6 +42,7 @@ public class TribeMonkey extends Monkey implements UpgradableMonkey{
 
 
     }
+    @Override
     public void upgradeSecond(){
         if(this.mejoras[1]==5)return;
         this.mejoras[1] = this.mejoras[1]+1;
@@ -50,6 +52,7 @@ public class TribeMonkey extends Monkey implements UpgradableMonkey{
             mm.rateTribu += 1 * tasaAportado;
         }
     }
+    @Override
     public void upgradeThird(){
         if(this.mejoras[2]==5)return;
         this.mejoras[2] = this.mejoras[2]+1;

@@ -1,10 +1,7 @@
 package managers;
 
 import entities.bullets.Bullet;
-import entities.monkeys.ClaveMachineMono;
-import entities.monkeys.Monkey;
-import entities.monkeys.MonoCanon;
-import entities.monkeys.TribeMonkey;
+import entities.monkeys.*;
 import graphics.Color;
 import graphics.Tile;
 
@@ -14,8 +11,10 @@ public class MonkeyManager {
     ArrayList<Monkey> monkeys;
     public float dañoTribu;
     public float rateTribu;
+    public MonkeyXMLLoader monkeyXMLLoader;
     public MonkeyManager() {
         monkeys = new ArrayList<Monkey>();
+        monkeyXMLLoader = new MonkeyXMLLoader();
     }
 
     public ArrayList<Monkey> getMonkeys() {
@@ -27,6 +26,8 @@ public class MonkeyManager {
     public void removeMonkey(Monkey monkey) {
         monkeys.remove(monkey);
     }
+    public Monkey monoSelecionado;
+
     public Monkey setMonkey(Monkey monkey) {
         Tile tile = monkey.tile;
         if(!canIPlaceAMonkey(tile)) {

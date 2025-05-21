@@ -28,6 +28,7 @@ public class BalloonManager {
         waveDurantion.add(25f);
         waveDurantion.add(100f);
     }
+
     public void addBalloon(Balloon balloon) {balloons.add(balloon);}
 
     public void removeBalloon(Balloon balloon) {balloons.remove(balloon);}
