@@ -1,6 +1,6 @@
 package levels;
 
-import graphics.terrain.Tile;
+import graphics.Tile;
 import managers.GameManager;
 import managers.TileManager;
 import java.util.ArrayList;

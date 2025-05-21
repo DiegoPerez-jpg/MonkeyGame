@@ -1,7 +1,7 @@
 package managers;
 
+import graphics.Tile;
 import graphics.UI;
-import graphics.terrain.Tile;
 import org.lwjgl.glfw.GLFW;
 import utilities.math.Point;
 
@@ -104,9 +104,32 @@ public class InputManager {
 
     private void click(){
         Point mp = getMousePosition();
-        GameManager.getInstance().uiManager.unselectAll();
-        for (UI div : gm.uiManager.divs) {if (div.contain(mp)) div.trigger = true;}
-        //for (Tile tile : gm.tileManager.tiles) {if (tile.contain(mp)) System.out.println("Tile Clicked" + tile.getCasilla()); }
+        UIManager uim = gm.uiManager;
+        uim.unselectAll();
+        for (UI div : uim.divs) {
+            if (div.contain(mp)) {
+                div.trigger = true;
+                if (div == uim.monkeyShop.get(0)) uim.currentMonkey = 0;
+                else if (div == uim.monkeyShop.get(1)) uim.currentMonkey = 1;
+                else if (div == uim.monkeyShop.get(2)) uim.currentMonkey = 2;
+            }
+        };
+        if (uim.placeMonkey) {
+            Tile tile = null;
+            for (Tile t : gm.tileManager.tiles) {if (t.contain(mp)) tile = t;}
+            switch(uim.currentMonkey) {
+                case 0:
+                    gm.monkeyManager.setTribeMonkey(tile);
+                    break;
+                case 1:
+                    gm.monkeyManager.setMachineMonkey(tile);
+                    break;
+                case 2:
+                    gm.monkeyManager.setCanonMonkey(tile);
+                    break;
+            }
+            uim.placeMonkey = false;
+        }
     }
 
     public Point getMousePosition() {

@@ -1,13 +1,11 @@
 package managers;
 
-import entities.monkeys.TribeMonkey;
 import entities.monkeys.MonoCanon;
 import graphics.Color;
 import graphics.Renderer;
 import levels.Level;
 import utilities.Timer;
 import utilities.math.Point;
-
 import java.util.ArrayList;
 
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
@@ -57,7 +55,9 @@ public class GameManager {
         this.inputManager = new InputManager();
 //        monkeyManager.addMonkey(new TribeMonkey(tileManager.searchTile(4,5)));
 //        monkeyManager.addMonkey(new ClaveMachineMono(tileManager.searchTile(9,9)));
-        monkeyManager.addMonkey(new MonoCanon(tileManager.searchTile(6,7)));
+//        monkeyManager.setCanonMonkey(tileManager.searchTile(6,7));
+//        monkeyManager.setTribeMonkey(tileManager.searchTile(7,6));
+        monkeyManager.setMachineMonkey(tileManager.searchTile(6,5));
         getCurrentLevel().crearCamino();
     }
 
@@ -65,8 +65,8 @@ public class GameManager {
         init();
         //glfwWindowShouldClose devuelve true si se cierra la ventana
         while (!glfwWindowShouldClose(renderer.getWindow())) { //Game loop
-            renderer.update();
             inputManager.update();
+            renderer.update();
             balloonManager.updateBalloons();
             monkeyManager.updateMonkey();
             bulletManager.updateBullets();

@@ -1,7 +1,7 @@
 package managers;
 
 import graphics.Color;
-import graphics.terrain.Tile;
+import graphics.Tile;
 import utilities.math.Point;
 
 import java.util.ArrayList;

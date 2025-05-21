@@ -5,12 +5,10 @@ import entities.balloons.Balloon;
 import entities.bullets.Bullet;
 import entities.bullets.BulletPrefab;
 import graphics.Texture;
-import graphics.terrain.Tile;
+import graphics.Tile;
 import managers.GameManager;
 import utilities.math.Vector;
 import utilities.Util;
-
-import java.util.ArrayList;
 
 
 public abstract class Monkey extends Entity {
@@ -29,6 +27,7 @@ public abstract class Monkey extends Entity {
     int[] mejoras;
     boolean canDetectCamos = false;
     int cantidadBalasDisparadas = 1;
+    public Tile tile;
 
     public Monkey(int size, BulletPrefab bp, float rate, float cost, float range, String nombre, String skin, Tile tile) {
         super((new Texture(skin)), tile.getPosition(), size);
@@ -38,6 +37,7 @@ public abstract class Monkey extends Entity {
         this.cost = cost;
         this.range = range * GameManager.getInstance().tileSize;
         this.nombre = nombre;
+        this.tile = tile;
     }
 
     public Monkey(int size, BulletPrefab bp, float rate, float cost, float range, String nombre, String skin, Tile tile, boolean canDetectCamos) {

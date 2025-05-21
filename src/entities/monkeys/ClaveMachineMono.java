@@ -4,7 +4,7 @@ import entities.balloons.Balloon;
 import entities.bullets.Bullet;
 import entities.bullets.BulletPrefab;
 import graphics.Color;
-import graphics.terrain.Tile;
+import graphics.Tile;
 import managers.GameManager;
 import utilities.Util;
 import utilities.math.Vector;
@@ -51,7 +51,6 @@ public class ClaveMachineMono extends Monkey implements UpgradableMonkey {
         this.setupClavosSpawneados();
         if(clavosSpawneados.size()>maxClavosSpawneados)return null;
         if(time-lastShotTime>rate || lastShotTime==0){
-            System.out.println("xdd");
             for (int i = 0; i < cantidadBalasDisparadas; i++) {
                 lastShotTime = time;
                 Tile t = buscarTileCercana();

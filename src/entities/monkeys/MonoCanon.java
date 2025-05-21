@@ -3,7 +3,7 @@ package entities.monkeys;
 import entities.balloons.Balloon;
 import entities.bullets.Bullet;
 import entities.bullets.BulletPrefab;
-import graphics.terrain.Tile;
+import graphics.Tile;
 
 public class MonoCanon extends Monkey implements UpgradableMonkey{
     private int cantidadDispersion;
@@ -12,7 +12,7 @@ public class MonoCanon extends Monkey implements UpgradableMonkey{
     private int damage;
 
     public MonoCanon(Tile tile){
-        super(1, BulletPrefab.BULLETCANON,1f,500,5,"Mono cañon","src/assets/MonoCanon.png",tile);
+        super(1, BulletPrefab.BULLETCANON,1f,500,5,"Mono cañon","src/assets/monkeys/MonoCanon.png",tile);
     }
 
     @Override

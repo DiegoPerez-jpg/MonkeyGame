@@ -3,11 +3,9 @@ package graphics;
 import entities.balloons.Balloon;
 import entities.bullets.Bullet;
 import entities.monkeys.Monkey;
-import graphics.terrain.Tile;
 import managers.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
-import utilities.math.Point;
 
 
 import static org.lwjgl.glfw.Callbacks.*;
@@ -63,8 +61,7 @@ public class Renderer {
     }
 
     private void draw(){
-        for (Tile t : tm.tiles){Draw.drawPoly(t.corners, t.background);}
-        for (Monkey t : mm.getMonkeys()){t.skin.render(t.position);}
+        for (Tile t : tm.tiles){t.render();}
         for (Balloon b : bm.getBalloons()){b.skin.render(b.position);}
         for(Bullet b : bulletManager.getBullets()){b.skin.render(b.position);}
 

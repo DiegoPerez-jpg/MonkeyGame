@@ -1,6 +1,6 @@
 package managers;
 
-import graphics.terrain.Tile;
+import graphics.Tile;
 
 import java.io.File;
 import java.util.ArrayList;

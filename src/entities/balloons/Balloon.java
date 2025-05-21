@@ -2,7 +2,7 @@ package entities.balloons;
 
 import entities.Entity;
 import graphics.Texture;
-import graphics.terrain.Tile;
+import graphics.Tile;
 import managers.GameManager;
 import utilities.math.Point;
 import utilities.Util;

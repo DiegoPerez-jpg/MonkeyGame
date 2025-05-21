@@ -1,9 +1,12 @@
 package managers;
 
 import entities.bullets.Bullet;
+import entities.monkeys.ClaveMachineMono;
 import entities.monkeys.Monkey;
+import entities.monkeys.MonoCanon;
+import entities.monkeys.TribeMonkey;
 import graphics.Color;
-import graphics.terrain.Tile;
+import graphics.Tile;
 
 import java.util.ArrayList;
 
@@ -24,11 +27,30 @@ public class MonkeyManager {
     public void removeMonkey(Monkey monkey) {
         monkeys.remove(monkey);
     }
-    public void addTipeMonkey(Monkey monkey, Tile tile) {
-        if(!canIPlaceAMonkey(tile)) {return;}
+    public Monkey setMonkey(Monkey monkey) {
+        Tile tile = monkey.tile;
+        if(!canIPlaceAMonkey(tile)) {
+            System.out.println("No puedes colocar el monkey aquí");
+            return null;
+        }
         monkey.setPosition(tile.getPosition());
+        tile.monkey = monkey;
         monkeys.add(monkey);
+        return monkey;
     }
+
+    public Monkey setTribeMonkey(Tile tile){
+        return setMonkey(new TribeMonkey(tile));
+    }
+
+    public Monkey setCanonMonkey(Tile tile){
+        return setMonkey(new MonoCanon(tile));
+    }
+
+    public Monkey setMachineMonkey(Tile tile){
+        return setMonkey(new ClaveMachineMono(tile));
+    }
+
     public void deleteMonkey(Tile tile) {
         for (Monkey monkey : monkeys) {
             if(monkey.position == tile.getPosition()){
@@ -37,9 +59,9 @@ public class MonkeyManager {
         }
     }
     public boolean canIPlaceAMonkey(Tile tile) {
-        if(GameManager.getInstance().tileManager.searchTile(tile.getCasilla().x, tile.getCasilla().y).background== Color.GREEN)return true;
-        return false;
+        return tile.background == Color.GRASS && tile.monkey == null;
     }
+
     public void updateMonkey() {
         float t = (float)GameManager.getInstance().timer.getTime();
         for(Monkey m : monkeys) {

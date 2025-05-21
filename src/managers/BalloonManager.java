@@ -1,7 +1,7 @@
 package managers;
 
 import entities.balloons.Balloon;
-import graphics.terrain.Tile;
+import graphics.Tile;
 
 import java.util.ArrayList;
 

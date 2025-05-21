@@ -11,6 +11,8 @@ public class UIManager {
     public UI asideUI, bottomUI;
     public ArrayList<UI> divs, monkeyShop;
     public Texture shadowMonkey;
+    public int currentMonkey;
+    public boolean placeMonkey;
     public UIManager() {
         this.divs = new ArrayList<>();
         this.monkeyShop = new ArrayList<>();
@@ -56,26 +58,26 @@ public class UIManager {
         //Tienda de monos
         UI aui1 = asideUI.addSupport(0.5f);
         aui1.setVerticalAlign(true);
-        monkeyShop.add(aui1.addLayout(0.235f, Color.GREEN));
+        monkeyShop.add(aui1.addLayout(0.235f, Color.TRANSPARENT));
         monkeyShop.get(0).setTexture2(new Texture("src/assets/monkeys/monkeyDarderolvl1.png"));
         monkeyShop.get(0).setTexture(new Texture("src/assets/monkeys/monkeyDarderolvl1_esc.png"));
-        monkeyShop.add(aui1.addLayout(0.235f, Color.GREEN));
+        monkeyShop.add(aui1.addLayout(0.235f, Color.TRANSPARENT));
         monkeyShop.get(1).setTexture2(new Texture("src/assets/monkeys/creadora de clavos.png"));
         monkeyShop.get(1).setTexture(new Texture("src/assets/monkeys/creadora de clavos esc.png"));
-        monkeyShop.add(aui1.addLayout(0.235f, Color.GREEN));
-//        monkeyShop.get(2).setTexture(new Texture(""));
-        monkeyShop.add(aui1.addLayout(0.235f, Color.GREEN));
-//        monkeyShop.get(3).setTexture(new Texture(""));
+        monkeyShop.add(aui1.addLayout(0.235f, Color.TRANSPARENT));
+        monkeyShop.get(2).setTexture(new Texture("src/assets/monkeys/MonoCanon_esc.png"));
+        monkeyShop.add(aui1.addLayout(0.235f, Color.TRANSPARENT));
+        monkeyShop.get(2).setTexture2(new Texture("src/assets/monkeys/MonoCanon.png"));
 
         UI aui2 = asideUI.addSupport(0.5f);
         aui2.setVerticalAlign(true);
-        monkeyShop.add(aui2.addLayout(0.235f, Color.GREEN));
+        monkeyShop.add(aui2.addLayout(0.235f, Color.TRANSPARENT));
 //        monkeyShop.get(4).setTexture(new Texture(""));
-        monkeyShop.add(aui2.addLayout(0.235f, Color.GREEN));
+        monkeyShop.add(aui2.addLayout(0.235f, Color.TRANSPARENT));
 //        monkeyShop.get(5).setTexture(new Texture(""));
-        monkeyShop.add(aui2.addLayout(0.235f, Color.GREEN));
+        monkeyShop.add(aui2.addLayout(0.235f, Color.TRANSPARENT));
 //        monkeyShop.get(6).setTexture(new Texture(""));
-        monkeyShop.add(aui2.addLayout(0.235f, Color.GREEN));
+        monkeyShop.add(aui2.addLayout(0.235f, Color.TRANSPARENT));
 //        monkeyShop.get(7).setTexture(new Texture(""));
 
 
@@ -89,7 +91,6 @@ public class UIManager {
     }
 
     public void check(){
-        boolean found = false;
         for (UI monkey : monkeyShop) {
             if (monkey.trigger) {
                 monkey.select(2);
@@ -97,10 +98,9 @@ public class UIManager {
             }
             if (monkey.selected && monkey.texture2 != null) {
                 this.shadowMonkey = monkey.texture2;
-                found = true;
+                placeMonkey = true;
             }
         }
-        if (!found) this.shadowMonkey = null;
     }
 
     public void renderShadow(){
@@ -109,6 +109,7 @@ public class UIManager {
         int ts = GameManager.getInstance().tileSize;
         mp = new Point(mp.x-(ts/2), mp.y-(ts/2)); //Resto la mitad del ts a las coordenadas para dentrar la imagen
         shadowMonkey.smoothRender(mp, 0.5f);
+        shadowMonkey = null;
     }
 
     public void unselectAll(){

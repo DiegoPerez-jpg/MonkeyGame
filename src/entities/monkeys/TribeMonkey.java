@@ -3,7 +3,7 @@ package entities.monkeys;
 import entities.balloons.Balloon;
 import entities.bullets.Bullet;
 import entities.bullets.BulletPrefab;
-import graphics.terrain.Tile;
+import graphics.Tile;
 import managers.GameManager;
 import managers.MonkeyManager;
 

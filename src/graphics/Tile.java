@@ -1,6 +1,5 @@
-package graphics.terrain;
+package graphics;
 
-import graphics.Color;
 import managers.GameManager;
 import utilities.math.Point;
 import entities.monkeys.Monkey;
@@ -12,7 +11,7 @@ public class Tile { // 32x32 px each
     public Point position; //Posición relativa a la esquina inferior izq
     public ArrayList<Point> corners;
     boolean isGrass;
-    Monkey monkey;
+    public Monkey monkey;
     public Tile(Color background, Point casilla) {
         int ts = GameManager.getInstance().tileSize; //Ancho del tile
         int ey = GameManager.getInstance().extension_y; //Extensión vertical de la UI
@@ -44,6 +43,13 @@ public class Tile { // 32x32 px each
             return true;
         }
         return false;
+    }
+
+    public void renderMonkey(){if (monkey != null) monkey.skin.render(position);}
+
+    public void render(){
+        Draw.drawPoly(corners, background);
+        renderMonkey();
     }
 
     public Point getCasilla(){
