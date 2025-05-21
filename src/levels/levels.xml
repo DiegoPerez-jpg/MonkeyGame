@@ -38,25 +38,38 @@
             <wave>
                 <tiempo>10</tiempo>
                 <balloons>
+                    <balloon>20</balloon>
                     <balloon>10</balloon>
                 </balloons>
             </wave>
 
             <wave>
-                <tiempo>10</tiempo>
+                <tiempo>20</tiempo>
                 <balloons>
+                    <balloon>30</balloon>
+                    <balloon>20</balloon>
                     <balloon>10</balloon>
                 </balloons>
             </wave>
             <wave>
-                <tiempo>10</tiempo>
+                <tiempo>20</tiempo>
                 <balloons>
+                    <balloon>40</balloon>
+                    <balloon>30</balloon>
+                    <balloon>20</balloon>
                     <balloon>10</balloon>
                 </balloons>
             </wave>
             <wave>
-                <tiempo>10</tiempo>
+                <tiempo>20</tiempo>
                 <balloons>
+                    <balloon>40</balloon>
+                    <balloon>30</balloon>
+                    <balloon>20</balloon>
+                    <balloon>10</balloon>
+                    <balloon>40</balloon>
+                    <balloon>30</balloon>
+                    <balloon>20</balloon>
                     <balloon>10</balloon>
                 </balloons>
             </wave>

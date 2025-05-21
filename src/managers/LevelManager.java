@@ -45,6 +45,36 @@ public class LevelManager {
                         }
                     }
                     this.levels.add(new Level(id, esquinas));
+
+
+
+                    ArrayList<ArrayList<Integer>> todasLasWaves = new ArrayList<>();
+
+                    Element wavesElement = (Element) level.getElementsByTagName("waves").item(0);
+                    NodeList waveNodes = wavesElement.getElementsByTagName("wave");
+
+                    ArrayList<Float> tiempos = new ArrayList<>();
+
+                    for (int j = 0; j < waveNodes.getLength(); j++) {
+                        Element waveElement = (Element) waveNodes.item(j);
+
+                        String tiempoTexto = waveElement.getElementsByTagName("tiempo").item(0).getTextContent();
+                        int tiempo = Integer.parseInt(tiempoTexto);
+                        tiempos.add((float) tiempo);
+                        ArrayList<Integer> globosWave = new ArrayList<>();
+                        NodeList balloonNodes = waveElement.getElementsByTagName("balloon");
+
+                        for (int k = 0; k < balloonNodes.getLength(); k++) {
+                            String textoGlobo = balloonNodes.item(k).getTextContent();
+                            int globo = Integer.parseInt(textoGlobo);
+                            globosWave.add(globo);
+                        }
+
+                        todasLasWaves.add(globosWave);
+                        GameManager.getInstance().balloonManager.amountBalloon = todasLasWaves;
+                        GameManager.getInstance().balloonManager.waveDurantion = tiempos;
+                    }
+
                 }
             }
         }
