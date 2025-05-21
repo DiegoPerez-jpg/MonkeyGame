@@ -41,24 +41,28 @@ public class UIManager {
             UI bui21 = bui2.addSupport(0.3f); //Parte izq
                 bui21.setVerticalAlign(true);
                 bui21.addSupport(0.2f);
-                bui21.addLayout(0.6f, Color.TRANSPARENT); //foto
+                UI bui211 = bui21.addLayout(0.6f, Color.TRANSPARENT); //foto
             UI bui22 = bui2.addLayout(0.7f, Color.TRANSPARENT); //txt
         UI bui3 = bottomUI.addSupport(0.29f);
             UI bui31 = bui3.addSupport(0.3f); //Parte izq
                 bui31.setVerticalAlign(true);
                 bui31.addSupport(0.2f);
-                bui31.addLayout(0.6f, Color.TRANSPARENT); //foto
+        UI bu311 = bui31.addLayout(0.6f, Color.TRANSPARENT); //foto
             UI bui32 = bui3.addLayout(0.7f, Color.TRANSPARENT); //txt
         UI bui4 = bottomUI.addSupport(0.29f);
         UI bui41 = bui4.addSupport(0.3f); //Parte izq
             bui41.setVerticalAlign(true);
             bui41.addSupport(0.2f);
-            bui41.addLayout(0.6f, Color.TRANSPARENT); //foto
+        UI bu411 = bui41.addLayout(0.6f, Color.TRANSPARENT); //foto
+            bui41.setTexture(new Texture("src/assets/monkeys/monkeyDarderolvl1_esc.png"));
         UI bui42 = bui4.addLayout(0.7f, Color.TRANSPARENT); //txt
         monkeyUpgrades = new ArrayList<>();
         monkeyUpgrades.add(bui2);
         monkeyUpgrades.add(bui3);
         monkeyUpgrades.add(bui4);
+        monkeyUpgrades.add(bui211);
+        monkeyUpgrades.add(bu311);
+        monkeyUpgrades.add(bu411);
         //Tienda de monos
         UI aui1 = asideUI.addSupport(0.5f);
         aui1.setVerticalAlign(true);
@@ -110,9 +114,10 @@ public class UIManager {
                 tile.colision.trigger = false;
                 if(tile.monkey==null)continue;
                 GameManager.getInstance().monkeyManager.monoSelecionado = tile.monkey;
-                monkeyUpgrades.get(0).layouts.get(0).texture= new Texture(tile.monkey.getFirstImageUpgrade());
-                monkeyUpgrades.get(1).layouts.get(0).texture= new Texture(tile.monkey.getSecondImageUpgrade());
-                monkeyUpgrades.get(2).layouts.get(0).texture= new Texture(tile.monkey.getThirdImageUpgrade());
+                System.out.println(monkeyUpgrades.get(0).layouts.get(0));
+                monkeyUpgrades.get(3).texture= new Texture(tile.monkey.getFirstImageUpgrade());
+                monkeyUpgrades.get(4).texture= new Texture(tile.monkey.getSecondImageUpgrade());
+                monkeyUpgrades.get(5).texture= new Texture(tile.monkey.getThirdImageUpgrade());
             }
         }
         for (int i = 0; i < monkeyUpgrades.size(); i++) {
