@@ -15,7 +15,7 @@ public class UI {
     private float space; //variable entre 0-1 que representa el espacio ocupado la UI
     public boolean trigger; //variable activada cuando ocurre un evento con el layout
     public boolean selected;
-    public Texture texture;
+    public Texture texture, texture2;
     public UI(Color color, ArrayList<Point> corners, boolean vertical){ //Puntos en sentido antihorario empezando arriba a la izq
         this.background = color;
         this.corners = corners;
@@ -30,6 +30,7 @@ public class UI {
         this.trigger = false;
         this.selected = false;
         this.texture = null;
+        this.texture2 = null;
     }
     public UI(Color color, ArrayList<Point> corners, boolean vertical, int borderSize, Color borderColor){
         this(color, corners, vertical);
@@ -141,4 +142,5 @@ public class UI {
     }
 
     public void setTexture(Texture texture){this.texture = texture;}
+    public void setTexture2(Texture texture){this.texture2 = texture;}
 }

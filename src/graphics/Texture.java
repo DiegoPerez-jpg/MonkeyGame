@@ -14,8 +14,6 @@ import static org.lwjgl.opengl.GL30.glGenerateMipmap;
 public class Texture {
     int texId, width, height;
     public Texture(String path){
-//        glEnable(GL_BLEND);
-//        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         MemoryStack stack = MemoryStack.stackPush();
         IntBuffer widthBuf = stack.mallocInt(1);
         IntBuffer heightBuff = stack.mallocInt(1);
@@ -44,9 +42,10 @@ public class Texture {
         this.texId = textureID;
     }
 
-    public void render(Point p, int scale){
+    public void smoothRender(Point p, int scale, float alpha){
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, texId);
+        glColor4f(1, 1, 1, alpha);
         glBegin(GL_QUADS);
         glTexCoord2f(0.0f, 0.0f); glVertex2f(p.x, p.y);         // Abajo izquierda
         glTexCoord2f(1.0f, 0.0f); glVertex2f(p.x + width*scale, p.y);     // Abajo derecha
@@ -56,6 +55,10 @@ public class Texture {
 
         glDisable(GL_TEXTURE_2D);
     }
+
+    public void smoothRender(Point p, float alpha){smoothRender(p,1,alpha);}
+
+    public void render(Point p, int scale){smoothRender(p, scale, 1f);}
 
     public void render(Point p) {render(p,1);}
 }

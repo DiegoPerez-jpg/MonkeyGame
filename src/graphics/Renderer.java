@@ -71,6 +71,8 @@ public class Renderer {
         //Render interfaces y subinterfaces
         gm.uiManager.asideUI.drawRecursively();
         gm.uiManager.bottomUI.drawRecursively();
+
+        gm.uiManager.renderShadow(); //Dibujar shadow monkey
     }
 
     public void clean() { //Libera los recursos

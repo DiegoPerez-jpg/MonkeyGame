@@ -3,7 +3,6 @@ package managers;
 import graphics.Color;
 import graphics.Texture;
 import graphics.UI;
-import utilities.Util;
 import utilities.math.Point;
 
 import java.util.ArrayList;
@@ -11,9 +10,11 @@ import java.util.ArrayList;
 public class UIManager {
     public UI asideUI, bottomUI;
     public ArrayList<UI> divs, monkeyShop;
+    public Texture shadowMonkey;
     public UIManager() {
         this.divs = new ArrayList<>();
         this.monkeyShop = new ArrayList<>();
+        this.shadowMonkey = null;
     }
 
     public void initUI(){
@@ -56,8 +57,10 @@ public class UIManager {
         UI aui1 = asideUI.addSupport(0.5f);
         aui1.setVerticalAlign(true);
         monkeyShop.add(aui1.addLayout(0.235f, Color.GREEN));
+        monkeyShop.get(0).setTexture2(new Texture("src/assets/monkeys/monkeyDarderolvl1.png"));
         monkeyShop.get(0).setTexture(new Texture("src/assets/monkeys/monkeyDarderolvl1_esc.png"));
         monkeyShop.add(aui1.addLayout(0.235f, Color.GREEN));
+        monkeyShop.get(1).setTexture2(new Texture("src/assets/monkeys/creadora de clavos.png"));
         monkeyShop.get(1).setTexture(new Texture("src/assets/monkeys/creadora de clavos esc.png"));
         monkeyShop.add(aui1.addLayout(0.235f, Color.GREEN));
 //        monkeyShop.get(2).setTexture(new Texture(""));
@@ -85,13 +88,27 @@ public class UIManager {
         return ui;
     }
 
-    public void checkTriggers(){
+    public void check(){
+        boolean found = false;
         for (UI monkey : monkeyShop) {
             if (monkey.trigger) {
                 monkey.select(2);
                 monkey.trigger = false;
             }
+            if (monkey.selected && monkey.texture2 != null) {
+                this.shadowMonkey = monkey.texture2;
+                found = true;
+            }
         }
+        if (!found) this.shadowMonkey = null;
+    }
+
+    public void renderShadow(){
+        if (shadowMonkey == null) return;
+        Point mp = GameManager.getInstance().inputManager.getMousePosition();
+        int ts = GameManager.getInstance().tileSize;
+        mp = new Point(mp.x-(ts/2), mp.y-(ts/2)); //Resto la mitad del ts a las coordenadas para dentrar la imagen
+        shadowMonkey.smoothRender(mp, 0.5f);
     }
 
     public void unselectAll(){

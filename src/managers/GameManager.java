@@ -1,16 +1,9 @@
 package managers;
 
 import entities.monkeys.TribeMonkey;
-import graphics.Color;
 import graphics.Renderer;
-import graphics.UI;
 import levels.Level;
 import utilities.Timer;
-import utilities.Util;
-import utilities.math.Point;
-import entities.balloons.Balloon;
-
-import java.util.ArrayList;
 
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 
@@ -70,7 +63,7 @@ public class GameManager {
             balloonManager.updateBalloons();
             monkeyManager.updateMonkey();
             bulletManager.updateBullets();
-            uiManager.checkTriggers();
+            uiManager.check();
         }
         renderer.clean();
     }
